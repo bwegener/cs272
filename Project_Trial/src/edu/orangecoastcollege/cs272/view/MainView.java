@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 
 public class MainView extends Application
 {
-//    static final String COMBAT_FOREST_PATH = "mp3/MUSIC.mp3";
+    static final String COMBAT_FOREST_PATH = "mp3/MUSIC.mp3";
 //    static final String INTRO_FOREST_PATH = "mp3/MUSIC2.mp3"
     @Override
     public void start(Stage primaryStage) throws Exception
