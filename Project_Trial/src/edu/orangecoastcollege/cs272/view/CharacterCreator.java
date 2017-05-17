@@ -12,6 +12,7 @@ public class CharacterCreator {
 
 	@FXML
 	private Label nameErrorLabel;
+
 	@FXML
 	private ImageView imageIV;
 

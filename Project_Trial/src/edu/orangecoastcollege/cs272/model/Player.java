@@ -6,6 +6,7 @@ public class Player {
 	private int mStrength;
 	private int mDexterity;
 	private int mIntellect;
+	// private Image playerImage;
 	
 	
 	public Player(int id, String name, int strength, int dexterity, int intellect)
