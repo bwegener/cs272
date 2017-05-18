@@ -32,6 +32,15 @@ public class ForestScene2 {
 	}
 	
 	@FXML
+	public Object statsScene()
+	{
+		ViewNavigator.prevScene = ViewNavigator.FOREST_SCENE_2;
+		ViewNavigator.prevTitle = "The Path";
+		ViewNavigator.loadScene("Player Stats", ViewNavigator.STATS_SCENE);
+		return this;
+	}
+	
+	@FXML
 	public Object examine()
 	{
 		/*

@@ -29,6 +29,7 @@ public class ViewNavigator {
 	// This is where I put the different scenes
 	public static final String CHARACTER_CREATOR = "CharacterCreator.fxml";
 	public static final String OPTIONS_SCENE = "OptionsScene.fxml";
+	public static final String STATS_SCENE = "PlayerStats.fxml";
 	public static final String INTRO_FOREST = "IntroForest.fxml";
 	public static final String FOREST_SCENE_2 = "ForestScene2.fxml";
 	public static final String COMBAT_FOREST = "CombatForest.fxml";

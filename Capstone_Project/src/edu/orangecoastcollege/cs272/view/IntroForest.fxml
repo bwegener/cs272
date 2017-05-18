@@ -62,5 +62,6 @@
             <Font size="20.0" />
          </font>
       </Button>
+      <Button layoutX="537.0" layoutY="14.0" mnemonicParsing="false" onAction="#statsScene" opacity="0.75" text="stats" />
    </children>
 </Pane>

@@ -43,6 +43,15 @@ public class CombatForest {
 	}
 	
 	@FXML
+	public Object statsScene()
+	{
+		ViewNavigator.prevScene = ViewNavigator.COMBAT_FOREST;
+		ViewNavigator.prevTitle = "Combat";
+		ViewNavigator.loadScene("Player Stats", ViewNavigator.STATS_SCENE);
+		return this;
+	}
+	
+	@FXML
 	public Object fight()
 	{
 		preBattleText.setVisible(false);

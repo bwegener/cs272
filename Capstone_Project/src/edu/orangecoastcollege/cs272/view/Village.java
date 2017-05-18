@@ -44,6 +44,15 @@ public class Village {
 	}
 	
 	@FXML
+	public Object statsScene()
+	{
+		ViewNavigator.prevScene = ViewNavigator.VILLAGE;
+		ViewNavigator.prevTitle = "A Village Approacheth";
+		ViewNavigator.loadScene("Player Stats", ViewNavigator.STATS_SCENE);
+		return this;
+	}
+	
+	@FXML
 	public Object woman()
 	{
 		

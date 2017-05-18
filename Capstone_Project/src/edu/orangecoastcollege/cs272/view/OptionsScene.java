@@ -2,7 +2,6 @@ package edu.orangecoastcollege.cs272.view;
 
 import javafx.fxml.FXML;
 
-
 public class OptionsScene {
 
 	@FXML

@@ -32,6 +32,15 @@ public class IntroForest {
 	}
 	
 	@FXML
+	public Object statsScene()
+	{
+		ViewNavigator.prevScene = ViewNavigator.INTRO_FOREST;
+		ViewNavigator.prevTitle = "Forest";
+		ViewNavigator.loadScene("Player Stats", ViewNavigator.STATS_SCENE);
+		return this;
+	}
+	
+	@FXML
 	public Object examine()
 	{
 		/*

@@ -11,7 +11,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.orangecoastcollege.cs272.view.CombatForest">
    <children>
-      <ImageView fitHeight="461.0" fitWidth="612.0" layoutX="-6.0" layoutY="-51.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="461.0" fitWidth="612.0" layoutX="-6.0" layoutY="-51.0" opacity="0.8" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../Images/CombatForest.jpeg" />
          </image>
@@ -111,5 +111,6 @@
             <Font size="25.0" />
          </font>
       </Button>
+      <Button layoutX="527.0" layoutY="14.0" mnemonicParsing="false" onAction="#statsScene" opacity="0.75" text="stats" />
    </children>
 </Pane>

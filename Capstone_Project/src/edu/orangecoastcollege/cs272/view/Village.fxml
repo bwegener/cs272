@@ -9,7 +9,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.orangecoastcollege.cs272.view.Village">
    <children>
-      <ImageView fitHeight="428.0" fitWidth="623.0" layoutX="-18.0" layoutY="-22.0" pickOnBounds="true">
+      <ImageView fitHeight="428.0" fitWidth="623.0" layoutX="-18.0" layoutY="-22.0" opacity="0.8" pickOnBounds="true">
          <image>
             <Image url="@../../../../../Images/Village.jpeg" />
          </image>
@@ -35,5 +35,6 @@
             <Font size="20.0" />
          </font>
       </Button>
+      <Button layoutX="537.0" layoutY="14.0" mnemonicParsing="false" onAction="#statsScene" opacity="0.75" text="stats" />
    </children>
 </Pane>
