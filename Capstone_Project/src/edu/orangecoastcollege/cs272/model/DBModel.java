@@ -172,4 +172,14 @@ public class DBModel {
         Connection connection = DriverManager.getConnection("jdbc:sqlite:" + mDBName);
         return connection;
     }
+    
+    
+    /*
+     * How Do I Make Close Connection Method????
+
+    public void close(Connection connection) throws SQLException
+    {
+    	connection.close();
+    }
+    */
 }

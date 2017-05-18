@@ -6,9 +6,9 @@ public class Attack {
 	private int mStrengthRequired;
 	private int mDexterityRequired;
 	private int mIntellectRequired;
-	private String mDescription;
+	private int mDamage;
 	
-	public Attack(int id, String name, int strengthRequired, int dexterityRequired, int intellectRequired, String description)
+	public Attack(int id, String name, int strengthRequired, int dexterityRequired, int intellectRequired, int damage)
 	{
 		super();
 		mId = id;
@@ -16,7 +16,7 @@ public class Attack {
 		mStrengthRequired = strengthRequired;
 		mDexterityRequired = dexterityRequired;
 		mIntellectRequired = intellectRequired;
-		mDescription = description;
+		mDamage = damage;
 	}
 
 	public int getId() {
@@ -39,8 +39,12 @@ public class Attack {
 		return mIntellectRequired;
 	}
 
-	public String getDescription() {
-		return mDescription;
+	public int getDamage() {
+		return mDamage;
+	}
+
+	public void setId(int id) {
+		mId = id;
 	}
 
 	public void setName(String name) {
@@ -59,15 +63,15 @@ public class Attack {
 		mIntellectRequired = intellectRequired;
 	}
 
-	public void setDescription(String description) {
-		mDescription = description;
+	public void setDamage(int damage) {
+		mDamage = damage;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((mDescription == null) ? 0 : mDescription.hashCode());
+		result = prime * result + mDamage;
 		result = prime * result + mDexterityRequired;
 		result = prime * result + mId;
 		result = prime * result + mIntellectRequired;
@@ -85,10 +89,7 @@ public class Attack {
 		if (getClass() != obj.getClass())
 			return false;
 		Attack other = (Attack) obj;
-		if (mDescription == null) {
-			if (other.mDescription != null)
-				return false;
-		} else if (!mDescription.equals(other.mDescription))
+		if (mDamage != other.mDamage)
 			return false;
 		if (mDexterityRequired != other.mDexterityRequired)
 			return false;
@@ -110,9 +111,7 @@ public class Attack {
 	public String toString() {
 		return "Attack [mId=" + mId + ", mName=" + mName + ", mStrengthRequired=" + mStrengthRequired
 				+ ", mDexterityRequired=" + mDexterityRequired + ", mIntellectRequired=" + mIntellectRequired
-				+ ", mDescription=" + mDescription + "]";
+				+ ", mDamage=" + mDamage + "]";
 	}
 
-	
-	
 }

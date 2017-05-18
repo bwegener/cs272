@@ -11,15 +11,33 @@ public class OptionsScene {
 		return this;
 	}
 	
+	/*
+	 * 
+	 * HOW TO MAKE THESE WORK???
+	 * 
+	@FXML
+	public Object save()
+	{
+		
+	}
+	
+	@FXML
+	public Object load()
+	{
+		
+	}
+	*/
+	
 	// Set all values to default (strength, dex, intellect = 5; name = blank);
 	@FXML
 	public Object title()
 	{
 		
-		ViewNavigator.loadScene("Character Creator", ViewNavigator.CHARACTER_CREATOR);
+		ViewNavigator.loadScene("Title", ViewNavigator.TITLE);
 		return this;
 	}
 	
+	@FXML
 	public Object quit()
 	{
 		System.exit(0);

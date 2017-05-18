@@ -31,17 +31,17 @@
             <Image url="@../../../../../Images/face1.jpeg" />
          </image>
       </ImageView>
-      <Button layoutX="540.0" layoutY="89.0" mnemonicParsing="false" text="+" />
-      <Button layoutX="333.0" layoutY="89.0" mnemonicParsing="false" text="-" />
-      <Slider layoutX="382.0" layoutY="207.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" value="5.0" />
-      <Button layoutX="540.0" layoutY="207.0" mnemonicParsing="false" text="+" />
-      <Slider layoutX="382.0" layoutY="256.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" value="5.0" />
-      <Slider layoutX="382.0" layoutY="310.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" value="5.0" />
-      <Button layoutX="540.0" layoutY="256.0" mnemonicParsing="false" text="+" />
-      <Button layoutX="540.0" layoutY="310.0" mnemonicParsing="false" text="+" />
-      <Button layoutX="344.0" layoutY="310.0" mnemonicParsing="false" text="-" />
-      <Button layoutX="344.0" layoutY="256.0" mnemonicParsing="false" text="-" />
-      <Button layoutX="345.0" layoutY="207.0" mnemonicParsing="false" text="-" />
+      <Button layoutX="540.0" layoutY="89.0" mnemonicParsing="false" onAction="#plusImage" text="+" />
+      <Button layoutX="333.0" layoutY="89.0" mnemonicParsing="false" onAction="#minusImage" text="-" />
+      <Slider disable="true" layoutX="382.0" layoutY="207.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" value="5.0" />
+      <Button layoutX="540.0" layoutY="207.0" mnemonicParsing="false" onAction="#plusStrength" text="+" />
+      <Slider disable="true" layoutX="382.0" layoutY="256.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" value="5.0" />
+      <Slider disable="true" layoutX="382.0" layoutY="310.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" value="5.0" />
+      <Button layoutX="540.0" layoutY="256.0" mnemonicParsing="false" onAction="#plusDexterity" text="+" />
+      <Button layoutX="540.0" layoutY="310.0" mnemonicParsing="false" onAction="#plusIntellect" text="+" />
+      <Button layoutX="344.0" layoutY="310.0" mnemonicParsing="false" onAction="#minusIntellect" text="-" />
+      <Button layoutX="344.0" layoutY="256.0" mnemonicParsing="false" onAction="#minusDexterity" text="-" />
+      <Button layoutX="345.0" layoutY="207.0" mnemonicParsing="false" onAction="#minusStrength" text="-" />
       <Label layoutX="81.0" layoutY="208.0" text="Strength">
          <font>
             <Font size="20.0" />
@@ -58,11 +58,6 @@
          </font>
       </Label>
       <Label layoutX="93.0" layoutY="129.0" text="Points">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <Label layoutX="206.0" layoutY="129.0" text="10">
          <font>
             <Font size="20.0" />
          </font>

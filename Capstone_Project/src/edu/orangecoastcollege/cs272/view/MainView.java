@@ -9,7 +9,7 @@ public class MainView extends Application
     public void start(Stage primaryStage) throws Exception
     {
         ViewNavigator.setStage(primaryStage);
-        ViewNavigator.loadScene("Character Creator", ViewNavigator.CHARACTER_CREATOR);
+        ViewNavigator.loadScene("Character Creator", ViewNavigator.TITLE);
     }
     
     public static void main(String[] args)
