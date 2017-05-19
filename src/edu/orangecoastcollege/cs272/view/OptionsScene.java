@@ -11,22 +11,6 @@ public class OptionsScene {
 		return this;
 	}
 	
-	/*
-	 * 
-	 * HOW TO MAKE THESE WORK???
-	 * 
-	@FXML
-	public Object save()
-	{
-		
-	}
-	
-	@FXML
-	public Object load()
-	{
-		
-	}
-	*/
 	
 	// Set all values to default (strength, dex, intellect = 5; name = blank);
 	@FXML

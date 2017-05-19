@@ -7,7 +7,7 @@ public class Title {
 	@FXML
 	public Object start()
 	{
-		ViewNavigator.loadScene("Load", ViewNavigator.LOAD);
+		ViewNavigator.loadScene("Load", ViewNavigator.CHARACTER_CREATOR);
 		return this;
 	}
 	

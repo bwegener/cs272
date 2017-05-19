@@ -72,5 +72,7 @@
             <Font size="25.0" />
          </font>
       </Label>
+      <Label fx:id="tooMuchStrengthError" layoutX="331.0" layoutY="183.0" text="You cannot have more strength than 10" textFill="#f80000" visible="false" />
+      <Label fx:id="tooMuchStrengthError1" layoutX="331.0" layoutY="183.0" text="You cannot have less strength than 0" textFill="#f80000" visible="false" />
    </children>
 </Pane>
