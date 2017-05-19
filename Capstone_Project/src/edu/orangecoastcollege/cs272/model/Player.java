@@ -1,16 +1,11 @@
 package edu.orangecoastcollege.cs272.model;
 
 /**
- * Tran Duong
- * CS272
- * May 3, 2017
- * The <code>Mob</code> 
- *
- * @author Duong
+ * Last Edited by: Tran Duong
  *
  */
 public class Player {
-	private int mID;
+	private int mId;
 	private String mName;
 	private int mIntStat;
 	private int mStrStat;
@@ -23,7 +18,7 @@ public class Player {
 	 * @return
 	 */
 	public int getID(){
-		return mID;
+		return mId;
 	}
 	/**
 	 * Retrieve the Name of the mob or player object
@@ -36,43 +31,42 @@ public class Player {
 	 * Retrieve the Int stat from the mob or player object
 	 * @return
 	 */
-	public int getIntStat() {
+	public int getIntellect() {
 		return mIntStat;
 	}
 	/**
 	 * Retrieve the Str stat from the mob or player object
 	 * @return
 	 */
-	public int getStrStat() {
+	public int getStrength() {
 		return mStrStat;
 	}
 	/**
 	 * Retrieve the Dex stat from the mob or player object
 	 * @return
 	 */
-	public int getDexStat() {
+	public int getDexterity() {
 		return mDexStat;
 	}
 	/**
 	 * Get the health of the player or enemy
 	 * @return
 	 */
-	public int getFullHealth() {
-		
+	public int getHealth() {
 		return mFullHealth;
 	}
 	/**
 	 * Set the int stat of the mob or player object
 	 * @param intStat
 	 */
-	public void setIntStat(int intStat) {
+	public void setIntellect(int intStat) {
 		mIntStat = intStat;
 	}
 	/**
 	 * Set the Str stat of the mob or player object
 	 * @param strStat
 	 */
-	public void setStrStat(int strStat) {
+	public void setStrength(int strStat) {
 		mStrStat = strStat;
 		this.calculateHealth();
 	}
@@ -80,7 +74,7 @@ public class Player {
 	 * Set the Dex stat of the mob or player object
 	 * @param dexStat
 	 */
-	public void setDexStat(int dexStat) {
+	public void setDexterity(int dexStat) {
 		mDexStat = dexStat;
 		this.calculateHealth();
 	}
@@ -94,7 +88,7 @@ public class Player {
 	 * @param dexStat stats used for damage calculations on ranged or light weight weapons
 	 */
 	public Player(int id, String name, int intStat, int strStat, int dexStat){
-		mID = id;
+		mId = id;
 		mName = name;
 		mIntStat = intStat;
 		mStrStat = strStat;
@@ -149,7 +143,7 @@ public class Player {
 		result = prime * result + mCurrentHealth;
 		result = prime * result + mDexStat;
 		result = prime * result + mFullHealth;
-		result = prime * result + mID;
+		result = prime * result + mId;
 		result = prime * result + mIntStat;
 		result = prime * result + ((mName == null) ? 0 : mName.hashCode());
 		result = prime * result + mStrStat;
@@ -170,7 +164,7 @@ public class Player {
 			return false;
 		if (mFullHealth != other.mFullHealth)
 			return false;
-		if (mID != other.mID)
+		if (mId != other.mId)
 			return false;
 		if (mIntStat != other.mIntStat)
 			return false;
