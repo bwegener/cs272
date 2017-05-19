@@ -1,100 +1,160 @@
 package edu.orangecoastcollege.cs272.model;
 
+/**
+ * Tran Duong
+ * CS272
+ * May 3, 2017
+ * The <code>Mob</code> 
+ *
+ * @author Duong
+ *
+ */
 public class Player {
-	private int mId;
+	private int mID;
 	private String mName;
-	private int mStrength;
-	private int mDexterity;
-	private int mIntellect;
-	private int mHealth;
-	private String mEquipment;
-	
-	
-	public Player(int id, String name, int strength, int dexterity, int intellect, int health, String equipment)
-	{
-		super();
-		mId = id;
-		mName = name;
-		mStrength = strength;
-		mDexterity = dexterity;
-		mIntellect = intellect;
-		mHealth = health;
-		mEquipment = equipment;
-	}
+	private int mIntStat;
+	private int mStrStat;
+	private int mDexStat;
+	private int mFullHealth;
+	private int mCurrentHealth;
 
-	public int getId() {
-		return mId;
+	/**
+	 * Retrieve the ID of the mob or player object
+	 * @return
+	 */
+	public int getID(){
+		return mID;
 	}
-
+	/**
+	 * Retrieve the Name of the mob or player object
+	 * @return
+	 */
 	public String getName() {
 		return mName;
 	}
-
-	public int getStrength() {
-		return mStrength;
+	/**
+	 * Retrieve the Int stat from the mob or player object
+	 * @return
+	 */
+	public int getIntStat() {
+		return mIntStat;
 	}
-
-	public int getDexterity() {
-		return mDexterity;
+	/**
+	 * Retrieve the Str stat from the mob or player object
+	 * @return
+	 */
+	public int getStrStat() {
+		return mStrStat;
 	}
-
-	public int getIntellect() {
-		return mIntellect;
+	/**
+	 * Retrieve the Dex stat from the mob or player object
+	 * @return
+	 */
+	public int getDexStat() {
+		return mDexStat;
+	}
+	/**
+	 * Get the health of the player or enemy
+	 * @return
+	 */
+	public int getFullHealth() {
+		
+		return mFullHealth;
+	}
+	/**
+	 * Set the int stat of the mob or player object
+	 * @param intStat
+	 */
+	public void setIntStat(int intStat) {
+		mIntStat = intStat;
+	}
+	/**
+	 * Set the Str stat of the mob or player object
+	 * @param strStat
+	 */
+	public void setStrStat(int strStat) {
+		mStrStat = strStat;
+		this.calculateHealth();
+	}
+	/**
+	 * Set the Dex stat of the mob or player object
+	 * @param dexStat
+	 */
+	public void setDexStat(int dexStat) {
+		mDexStat = dexStat;
+		this.calculateHealth();
 	}
 	
-	public int getHealth()
-	{
-		return mHealth;
-	}
-	
-	
-	// This is pulled from another Database
-	public String getEquipment()
-	{
-		return mEquipment;
-	}
-
-	public void setName(String name) {
+	/**
+	 * Used for the for the player.
+	 * @param name of the mob or player
+	 * @param level of the mob or player
+	 * @param intStat stats used for damage calculations on spells
+	 * @param strStat stats used for damage calculations on average or heavy physical weapons
+	 * @param dexStat stats used for damage calculations on ranged or light weight weapons
+	 */
+	public Player(int id, String name, int intStat, int strStat, int dexStat){
+		mID = id;
 		mName = name;
+		mIntStat = intStat;
+		mStrStat = strStat;
+		mDexStat = dexStat;
+		mFullHealth = this.calculateHealth();
+		mCurrentHealth = mFullHealth;
 	}
-
-	public void setStrength(int strength) {
-		mStrength = strength;
+	/**
+	 * Fully Heal mob with one command
+	 */
+	public void fullHeal(){
+		mCurrentHealth = mFullHealth;
 	}
-
-	public void setDexterity(int dexterity) {
-		mDexterity = dexterity;
+	/**
+	 * Increase the mob dex by one
+	 * @return
+	 */
+	public void dexUp(){
+		mDexStat += 1;
+		this.calculateHealth();
 	}
-
-	public void setIntellect(int intellect) {
-		mIntellect = intellect;
+	/**
+	 * Increase the mob str by one
+	 * @return
+	 */
+	public void strUp(){
+		mStrStat += 1;
+		this.calculateHealth();
 	}
-	
-	public void setHealth(int health) {
-		mHealth = mStrength + mDexterity + mIntellect;
+	/**
+	 * Increase the player's health by a numerical ammount
+	 * use a negative number to lower health
+	 * @param healthChange
+	 * @return
+	 */
+	public int gainHealth(int healthChange){
+		mCurrentHealth += healthChange;
+		return mCurrentHealth;
 	}
-	
-	
-	// IS THIS HOW YOU SET THIS?
-	public void setEquipment(String equipment)
-	{
-		mEquipment = equipment;
+	private int calculateHealth(){
+		return mStrStat + mIntStat + mDexStat;
+		
 	}
-
+	public String toString() {
+		return "Name: " + mName + "\nInt: " + mIntStat + "\nStr: " + mStrStat
+				+ "\nDexStat: " + mDexStat + "\nHealth: " + mCurrentHealth;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + mDexterity;
-		result = prime * result + ((mEquipment == null) ? 0 : mEquipment.hashCode());
-		result = prime * result + mHealth;
-		result = prime * result + mId;
-		result = prime * result + mIntellect;
+		result = prime * result + mCurrentHealth;
+		result = prime * result + mDexStat;
+		result = prime * result + mFullHealth;
+		result = prime * result + mID;
+		result = prime * result + mIntStat;
 		result = prime * result + ((mName == null) ? 0 : mName.hashCode());
-		result = prime * result + mStrength;
+		result = prime * result + mStrStat;
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -104,33 +164,23 @@ public class Player {
 		if (getClass() != obj.getClass())
 			return false;
 		Player other = (Player) obj;
-		if (mDexterity != other.mDexterity)
+		if (mCurrentHealth != other.mCurrentHealth)
 			return false;
-		if (mEquipment == null) {
-			if (other.mEquipment != null)
-				return false;
-		} else if (!mEquipment.equals(other.mEquipment))
+		if (mDexStat != other.mDexStat)
 			return false;
-		if (mHealth != other.mHealth)
+		if (mFullHealth != other.mFullHealth)
 			return false;
-		if (mId != other.mId)
+		if (mID != other.mID)
 			return false;
-		if (mIntellect != other.mIntellect)
+		if (mIntStat != other.mIntStat)
 			return false;
 		if (mName == null) {
 			if (other.mName != null)
 				return false;
 		} else if (!mName.equals(other.mName))
 			return false;
-		if (mStrength != other.mStrength)
+		if (mStrStat != other.mStrStat)
 			return false;
 		return true;
 	}
-
-	@Override
-	public String toString() {
-		return "Player [mId=" + mId + ", mName=" + mName + ", mStrength=" + mStrength + ", mDexterity=" + mDexterity
-				+ ", mIntellect=" + mIntellect + ", mHealth=" + mHealth + ", mEquipment=" + mEquipment + "]";
-	}
-	
 }
