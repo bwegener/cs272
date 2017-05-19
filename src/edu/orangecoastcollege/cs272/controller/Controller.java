@@ -22,12 +22,12 @@ public class Controller {
 	private static final String DB_NAME = "text_rpg.db";
 
 	private static final String PLAYER_TABLE_NAME = "player";
-	private static final String[] PLAYER_FIELD_NAMES = { "id", "name", "strength", "dexterity", "intellect", "health", "equipment" };
-	private static final String[] PLAYER_FIELD_TYPES = {"INTEGER PRIMARY KEY", "TEXT", "INTEGER", "INTEGER", "INTEGER", "INTEGER", "TEXT" };
+	private static final String[] PLAYER_FIELD_NAMES = { "id", "name", "strength", "dexterity", "intellect", "health" };
+	private static final String[] PLAYER_FIELD_TYPES = {"INTEGER PRIMARY KEY", "TEXT", "INTEGER", "INTEGER", "INTEGER", "INTEGER"};
 
 	private static final String ENEMY_TABLE_NAME = "enemy";
-	private static final String[] ENEMY_FIELD_NAMES = { "id", "name", "damage", "defense", "health", "equipment"};
-	private static final String[] ENEMY_FIELD_TYPES = { "INTEGER PRIMARY KEY", "TEXT", "INTEGER", "INTEGER", "INTEGER", "TEXT"};
+	private static final String[] ENEMY_FIELD_NAMES = { "id", "name", "damage", "defense", "health"};
+	private static final String[] ENEMY_FIELD_TYPES = { "INTEGER PRIMARY KEY", "TEXT", "INTEGER", "INTEGER", "INTEGER"};
 
 	private static final String ENEMY_DATA_FILE = "enemy.csv";
 
@@ -56,7 +56,6 @@ public class Controller {
 	// SAVE FILE???
 
 	private Player mCurrentPlayer;
-	private Enemy mEnemy;
 	private DBModel mPlayerDB;
 	private DBModel mEnemyDB;
 	private DBModel mEquipmentDB;
@@ -113,8 +112,7 @@ public class Controller {
 					int damage = Integer.parseInt(values.get(2));
 					int defense = Integer.parseInt(values.get(3));
 					int health = Integer.parseInt(values.get(4));
-					String equipment = values.get(5);
-					theOne.mAllEnemiesList.add(new Enemy(id, name, damage, defense, health, equipment));
+					theOne.mAllEnemiesList.add(new Enemy(id, name, damage, defense, health));
 				}
 
 				theOne.mEquipmentDB = new DBModel(DB_NAME, EQUIPMENT_TABLE_NAME, EQUIPMENT_FIELD_NAMES, EQUIPMENT_FIELD_TYPES);
@@ -180,12 +178,9 @@ public class Controller {
 				String[] data = fileScanner.nextLine().split(",");
 				String[] values = new String[ENEMY_FIELD_NAMES.length-1];
 
-				// IS THIS JUST FOR STRINGS?
 				values[0] = data[1].replaceAll("'", "''");
 				values[1] = data[2];
 				values[2] = data[3];
-				values[3] = data[4];
-				values[4] = data[5];
 				theOne.mEnemyDB.createRecord(Arrays.copyOfRange(ENEMY_FIELD_NAMES, 1, ENEMY_FIELD_NAMES.length), values);
 				recordsCreated++;
 			}
@@ -198,8 +193,8 @@ public class Controller {
 		return recordsCreated;
 
 	}
-
-	private int initializeQuestDBFromFile() throws SQLException {
+	
+	private int initializeEquipmentDBFromFile() throws SQLException {
 		int recordsCreated = 0;
 
 		if(theOne.mPlayerDB.getRecordCount() > 0) return 0;
@@ -213,12 +208,10 @@ public class Controller {
 				String[] values = new String[EQUIPMENT_FIELD_NAMES.length-1];
 
 				// IS THIS JUST FOR STRINGS?
-				values[0] = data[1].replaceAll("'", "''");
+				values[0] = data[1].replaceAll("'", "''"); // NEED FOR STRINGS
 				values[1] = data[2];
 				values[2] = data[3];
-				values[3] = data[4];
-				values[4] = data[5];
-				theOne.mQuestDB.createRecord(Arrays.copyOfRange(EQUIPMENT_FIELD_NAMES, 1, EQUIPMENT_FIELD_NAMES.length), values);
+				theOne.mEnemyDB.createRecord(Arrays.copyOfRange(EQUIPMENT_FIELD_NAMES, 1, EQUIPMENT_FIELD_NAMES.length), values);
 				recordsCreated++;
 			}
 			fileScanner.close();
@@ -230,7 +223,7 @@ public class Controller {
 		return recordsCreated;
 	}
 
-	private int initializeEquipmentDBFromFile() throws SQLException {
+	private int initializeQuestDBFromFile() throws SQLException {
 		int recordsCreated = 0;
 
 		if(theOne.mPlayerDB.getRecordCount() > 0) return 0;
@@ -242,14 +235,10 @@ public class Controller {
 			{
 				String[] data = fileScanner.nextLine().split(",");
 				String[] values = new String[QUEST_FIELD_NAMES.length-1];
-
-				// IS THIS JUST FOR STRINGS?
-				values[0] = data[1].replaceAll("'", "''"); // NEED FOR STRINGS
-				values[1] = data[2];
-				values[2] = data[3];
-				values[3] = data[4];
-				values[4] = data[5];
-				theOne.mEnemyDB.createRecord(Arrays.copyOfRange(QUEST_FIELD_NAMES, 1, QUEST_FIELD_NAMES.length), values);
+				values[0] = data[1].replaceAll("'", "''");
+				values[1] = data[2].replaceAll("'", "''");
+				values[2] = data[3].replaceAll("'", "''");
+				theOne.mQuestDB.createRecord(Arrays.copyOfRange(QUEST_FIELD_NAMES, 1, QUEST_FIELD_NAMES.length), values);
 				recordsCreated++;
 			}
 			fileScanner.close();
@@ -261,6 +250,7 @@ public class Controller {
 		return recordsCreated;
 	}
 
+	
 	private int initializeAttackDBFromFile() throws SQLException {
 		int recordsCreated = 0;
 
@@ -346,10 +336,6 @@ public class Controller {
 
 	 * HOW TO MAKE POINTS
 	 */
-
-
-
-
 
 
 }

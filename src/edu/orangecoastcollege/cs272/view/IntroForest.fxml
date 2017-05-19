@@ -27,21 +27,6 @@
          </font>
       </Button>
       <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#optionsScene" opacity="0.75" text="*" />
-      <Label fx:id="IntroText" layoutX="63.0" layoutY="72.0" text="You begin in a wooded clearing.&#10;You hear a voice that whispers,&#10;&quot;Hello PLAYER NAME,&#10;I look forward to meeting you.&quot;" textAlignment="CENTER">
-         <textFill>
-            <RadialGradient centerX="0.43258426966292135" centerY="0.49038461538461536" radius="0.5">
-               <stops>
-                  <Stop color="BLACK" />
-                  <Stop color="BLACK" offset="0.007434944237918215" />
-                  <Stop color="WHITE" offset="0.05947955390334572" />
-                  <Stop color="WHITE" offset="1.0" />
-               </stops>
-            </RadialGradient>
-         </textFill>
-         <font>
-            <Font size="30.0" />
-         </font>
-      </Label>
       <Label fx:id="examineText" layoutX="63.0" layoutY="72.0" text="You see many trees, &#10;you are in a forest after all,&#10;and on the ground in front of you, &#10;you see a stick." textAlignment="CENTER" visible="false">
          <textFill>
             <RadialGradient centerX="0.43258426966292135" centerY="0.49038461538461536" radius="0.5">
@@ -63,5 +48,21 @@
          </font>
       </Button>
       <Button layoutX="537.0" layoutY="14.0" mnemonicParsing="false" onAction="#statsScene" opacity="0.75" text="stats" />
+      <Label layoutX="63.0" layoutY="72.0" text="You begin in a wooded clearing.&#10;You hear a voice that whispers,&#10;&quot;Hello PLAYER NAME,&#10;I look forward to meeting you.&quot;" textAlignment="CENTER" visible="false">
+         <textFill>
+            <RadialGradient centerX="0.43258426966292135" centerY="0.49038461538461536" radius="0.5">
+               <stops>
+                  <Stop color="BLACK" />
+                  <Stop color="BLACK" offset="0.007434944237918215" />
+                  <Stop color="WHITE" offset="0.05947955390334572" />
+                  <Stop color="WHITE" offset="1.0" />
+               </stops>
+            </RadialGradient>
+         </textFill>
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Label fx:id="IntroText" layoutX="246.0" layoutY="138.0" text="Label" />
    </children>
 </Pane>

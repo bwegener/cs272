@@ -12,7 +12,18 @@ public class CharacterCreator {
 
     private static Controller controller = Controller.getInstance();
 
-    private int pool = 10;
+    private int pool = 5;
+    
+    Player currentPlayer = new Player();
+    
+    @FXML
+    private Label strengthLabel;
+    
+    @FXML
+    private Label dexterityLabel;
+    
+    @FXML
+    private Label intellectLabel;
     
     @FXML
     private Label pointsLabel;
@@ -25,6 +36,9 @@ public class CharacterCreator {
 
 	@FXML
 	private Label nameErrorLabel;
+	
+	@FXML
+	private Label poolErrorLabel;
 	
 	@FXML
 	private Label tooMuchStrengthError;
@@ -62,11 +76,6 @@ public class CharacterCreator {
 	@FXML
 	private Button minusIntellect;
 
-	@FXML
-	private Button plusImage;
-
-	@FXML
-	private Button minusImage;
 
 
 	@FXML
@@ -78,22 +87,23 @@ public class CharacterCreator {
 		return this;
 	}
 
-	/*
-	 * IDEA: set start button to be invisible till name is entered.
-	 */
-
 	@FXML
 	public Object start()
 	{
 		String name = nameTF.getText();
-		//controller.getCurr
 		if(name.isEmpty())
 		{
 			nameErrorLabel.setVisible(true);
 		}
+		
+		if(pool > 0)
+		{
+			poolErrorLabel.setVisible(true);
+		}
 
 		if(!name.isEmpty())
 		{
+			currentPlayer.setName(name);
 			ViewNavigator.loadScene("Forest", ViewNavigator.INTRO_FOREST);
 			return this;
 		}
@@ -112,14 +122,15 @@ public class CharacterCreator {
 			currentPlayer.setStrength(strength);
 			pool--;
 			pointsLabel.setText(String.valueOf(pool));
-			return this;
+			strengthLabel.setText(String.valueOf(currentPlayer.getStrength()));
 		}
 		else
 		{
 			tooMuchStrengthError.setVisible(true);
+			return null;
 		}
 			
-		return null;
+		return this;
 	}
 
 	@FXML
@@ -132,20 +143,36 @@ public class CharacterCreator {
 			strength--;
 			currentPlayer.setStrength(strength);
 			pool++;
-			pointsLabel.setText(String.valueOf(pool));
-			return this;
+			pointsLabel.setText(String.valueOf(pool));			
+			strengthLabel.setText(String.valueOf(currentPlayer.getStrength()));
 		}
 		else
 		{
 			notEnoughStrengthError.setVisible(true);
+			return null;
 		}
 
-		return null;
+		return this;
 	}
 
 	@FXML
 	public Object plusDexterity()
 	{
+		Player currentPlayer = controller.getCurrentPlayer();
+		if (pool > 0 || currentPlayer.getDexterity() < 10)
+		{
+			int dexterity = currentPlayer.getDexterity();
+			dexterity++;
+			currentPlayer.setDexterity(dexterity);
+			pool--;
+			pointsLabel.setText(String.valueOf(pool));
+			dexterityLabel.setText(String.valueOf(currentPlayer.getDexterity()));
+		}
+		else
+		{
+			tooMuchDexterityError.setVisible(true);
+			return null;
+		}
 
 		return this;
 	}
@@ -153,23 +180,67 @@ public class CharacterCreator {
 	@FXML
 	public Object minusDexterity()
 	{
-
+		Player currentPlayer = controller.getCurrentPlayer();
+		if(pool < 10 || currentPlayer.getDexterity() > 0)
+		{
+			int dexterity = currentPlayer.getDexterity();
+			dexterity--;
+			currentPlayer.setDexterity(dexterity);
+			pool++;
+			pointsLabel.setText(String.valueOf(pool));
+			dexterityLabel.setText(String.valueOf(currentPlayer.getDexterity()));
+		}
+		else
+		{
+			notEnoughDexterityError.setVisible(true);
+			return null;
+		}
 		return this;
 	}
 
 	@FXML
 	public Object plusIntellect()
 	{
-
+		Player currentPlayer = controller.getCurrentPlayer();
+		if(pool > 0 || currentPlayer.getDexterity() < 10)
+		{
+			int intellect = currentPlayer.getIntellect();
+			intellect++;
+			currentPlayer.setIntellect(intellect);
+			pool--;
+			pointsLabel.setText(String.valueOf(pool));
+			intellectLabel.setText(String.valueOf(currentPlayer.getIntellect()));
+		}
+		else
+		{
+			tooMuchIntellectError.setVisible(true);
+			return null;
+		}
 		return this;
 	}
 
 	@FXML
 	public Object minusIntellect()
 	{
-
+		Player currentPlayer = controller.getCurrentPlayer();
+		if(pool < 10 || currentPlayer.getIntellect() > 0)
+		{
+			int intellect = currentPlayer.getIntellect();
+			intellect--;
+			currentPlayer.setIntellect(intellect);
+			pool++;
+			pointsLabel.setText(String.valueOf(pool));
+			intellectLabel.setText(String.valueOf(currentPlayer.getIntellect()));
+		}
+		else
+		{
+			notEnoughIntellectError.setVisible(true);
+			return null;
+		}
 		return this;
 	}
+
+	/*
 
 	@FXML
 	public Object plusImage()
@@ -184,6 +255,7 @@ public class CharacterCreator {
 
 		return this;
 	}
+	*/
 
 
 }

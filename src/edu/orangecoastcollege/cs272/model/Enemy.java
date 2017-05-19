@@ -7,9 +7,8 @@ public class Enemy {
 	private int mDamage;
 	private int mDefense;
 	private int mHealth;
-	private String mEquipment;
 	
-	public Enemy(int id, String name, int damage, int defense, int health, String equipment)
+	public Enemy(int id, String name, int damage, int defense, int health)
 	{
 		super();
 		mId = id;
@@ -17,7 +16,6 @@ public class Enemy {
 		mDamage = damage;
 		mDefense = defense;
 		mHealth = health;
-		mEquipment = equipment;
 	}
 
 	public int getId() {
@@ -40,10 +38,6 @@ public class Enemy {
 		return mHealth;
 	}
 
-	public String getEquipment() {
-		return mEquipment;
-	}
-
 
 	public void setName(String name) {
 		mName = name;
@@ -61,17 +55,12 @@ public class Enemy {
 		mHealth = health;
 	}
 
-	public void setEquipment(String equipment) {
-		mEquipment = equipment;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + mDamage;
 		result = prime * result + mDefense;
-		result = prime * result + ((mEquipment == null) ? 0 : mEquipment.hashCode());
 		result = prime * result + mHealth;
 		result = prime * result + mId;
 		result = prime * result + ((mName == null) ? 0 : mName.hashCode());
@@ -91,11 +80,6 @@ public class Enemy {
 			return false;
 		if (mDefense != other.mDefense)
 			return false;
-		if (mEquipment == null) {
-			if (other.mEquipment != null)
-				return false;
-		} else if (!mEquipment.equals(other.mEquipment))
-			return false;
 		if (mHealth != other.mHealth)
 			return false;
 		if (mId != other.mId)
@@ -111,7 +95,7 @@ public class Enemy {
 	@Override
 	public String toString() {
 		return "Enemy [mId=" + mId + ", mName=" + mName + ", mDamage=" + mDamage + ", mDefense=" + mDefense
-				+ ", mHealth=" + mHealth + ", mEquipment=" + mEquipment + "]";
+				+ ", mHealth=" + mHealth + "]";
 	}
-	
+
 }

@@ -13,6 +13,7 @@ public class Player {
 	    mStrength = 5;
 	    mDexterity = 5;
 	    mIntellect = 5;
+	    mHealth = 25;
 	}
 
 	public Player(int id, String name, int strength, int dexterity, int intellect, int health)
@@ -68,7 +69,7 @@ public class Player {
 	}
 
 	public void setHealth(int health) {
-		mHealth = mStrength + mDexterity + mIntellect;
+		mHealth = health;
 	}
 
     @Override
@@ -111,7 +112,5 @@ public class Player {
         return "Player [mId=" + mId + ", mName=" + mName + ", mStrength=" + mStrength + ", mDexterity=" + mDexterity
                 + ", mIntellect=" + mIntellect + ", mHealth=" + mHealth + "]";
     }
-
-
 
 }

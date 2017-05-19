@@ -6,6 +6,8 @@ import javafx.scene.control.Label;
 
 public class IntroForest {
 	
+    //private static Controller controller = Controller.getInstance();
+    
 	@FXML
 	private Label examineText;
 	
@@ -20,7 +22,7 @@ public class IntroForest {
 	
 	@FXML
 	private Button pickUpButton;
-	
+
 	
 	@FXML
 	public Object optionsScene()
@@ -42,13 +44,7 @@ public class IntroForest {
 	
 	@FXML
 	public Object examine()
-	{
-		/*
-		 * Learn how to set text to visible and
-		 * then switch out text
-		 * do the same with buttons
-		 */
-		
+	{	
 		IntroText.setVisible(false);
 		examineText.setVisible(true);
 		examineButton.setVisible(false);

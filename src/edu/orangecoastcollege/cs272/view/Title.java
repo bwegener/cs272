@@ -3,11 +3,11 @@ package edu.orangecoastcollege.cs272.view;
 import javafx.fxml.FXML;
 
 public class Title {
-
+	
 	@FXML
 	public Object start()
 	{
-		ViewNavigator.loadScene("Load", ViewNavigator.CHARACTER_CREATOR);
+		ViewNavigator.loadScene("Character Creator", ViewNavigator.CHARACTER_CREATOR);
 		return this;
 	}
 	
