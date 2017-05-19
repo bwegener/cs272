@@ -19,7 +19,7 @@ public class CharacterCreator {
     
 	@FXML
 	private TextField nameTF;
-
+	
 	@FXML
 	private Button startButton;
 
@@ -41,8 +41,6 @@ public class CharacterCreator {
 	@FXML
 	private Label tooMuchIntellectError;
 	
-	@FXML
-	private Label notEnoughIntelllectError;
 
 	@FXML
 	private Button plusStrength;
