@@ -25,6 +25,24 @@ public class CharacterCreator {
 
 	@FXML
 	private Label nameErrorLabel;
+	
+	@FXML
+	private Label tooMuchStrengthError;
+	
+	@FXML
+	private Label notEnoughStrengthError;
+	
+	@FXML
+	private Label tooMuchDexterityError;
+	
+	@FXML
+	private Label notEnoughDexterityError;
+	
+	@FXML
+	private Label tooMuchIntellectError;
+	
+	@FXML
+	private Label notEnoughIntelllectError;
 
 	@FXML
 	private Button plusStrength;
@@ -87,23 +105,42 @@ public class CharacterCreator {
 	public Object plusStrength()
 	{
 		Player currentPlayer = controller.getCurrentPlayer();
-		if (pool > 0)
+		if (pool > 0 || currentPlayer.getStrength() < 10)
 		{
 			int strength = currentPlayer.getStrength();
 			strength++;
 			currentPlayer.setStrength(strength);
 			pool--;
 			pointsLabel.setText(String.valueOf(pool));
+			return this;
 		}
-		
-		return this;
+		else
+		{
+			tooMuchStrengthError.setVisible(true);
+		}
+			
+		return null;
 	}
 
 	@FXML
 	public Object minusStrength()
 	{
+		Player currentPlayer = controller.getCurrentPlayer();
+		if (pool < 10 || currentPlayer.getStrength() > 0)
+		{
+			int strength = currentPlayer.getStrength();
+			strength--;
+			currentPlayer.setStrength(strength);
+			pool++;
+			pointsLabel.setText(String.valueOf(pool));
+			return this;
+		}
+		else
+		{
+			notEnoughStrengthError.setVisible(true);
+		}
 
-		return this;
+		return null;
 	}
 
 	@FXML
