@@ -43,6 +43,10 @@ public class CharacterCreator {
 	private Button minusImage;
 	@FXML
 	private Slider strSlider;
+	@FXML
+	private Slider dexSlider;
+	@FXML
+	private Slider intSlider;
 
 
 	@FXML
@@ -99,7 +103,7 @@ public class CharacterCreator {
 	@FXML
 	public Object minusStrength()
 	{
-		if (pool < 10 && pool >= 0)
+		if (pool >= 0 && currentPlayer.getStrength() > 0)
 		{
 			currentPlayer.strDown();
 			strSlider.setValue(currentPlayer.getStrength());;
@@ -107,7 +111,7 @@ public class CharacterCreator {
 			pointsLabel.setText(String.valueOf(pool));
 			return this;
 		}
-		else if (pool == 10 && currentPlayer.getStrength() == 5)
+		else if (currentPlayer.getStrength() == 0)
 		{
 			insufficentStatLabel.setText("Not Enough Strength");
 		}
@@ -118,20 +122,19 @@ public class CharacterCreator {
 	@FXML
 	public Object plusDexterity()
 	{
-
-		if (pool < 10 && pool >= 0)
+		if (pool > 0 && currentPlayer.getDexterity() < 10)
 		{
-			currentPlayer.dexDown();
-			strSlider.setValue(currentPlayer.getDexterity());;
-			pool++;
+			currentPlayer.dexUp();
+			dexSlider.setValue(currentPlayer.getDexterity());;
+			pool--;
 			pointsLabel.setText(String.valueOf(pool));
 			return this;
 		}
-		else if (pool == 10 && currentPlayer.getDexterity() == 5)
+		else
 		{
-			insufficentStatLabel.setText("Not Enough Strength");
+			insufficentStatLabel.setText("To Much Dexterity");
 		}
-		
+			
 		return null;
 	}
 
@@ -139,21 +142,59 @@ public class CharacterCreator {
 	public Object minusDexterity()
 	{
 
-		return this;
+		if (pool >= 0 && currentPlayer.getDexterity() > 0)
+		{
+			currentPlayer.dexDown();
+			dexSlider.setValue(currentPlayer.getDexterity());;
+			pool++;
+			pointsLabel.setText(String.valueOf(pool));
+			return this;
+		}
+		else if (currentPlayer.getDexterity() == 0)
+		{
+			insufficentStatLabel.setText("Not Enough Dexterity");
+		}
+		
+		return null;
 	}
 
 	@FXML
 	public Object plusIntellect()
 	{
-
-		return this;
+		if (pool > 0 && currentPlayer.getIntellect() < 10)
+		{
+			currentPlayer.intUp();
+			intSlider.setValue(currentPlayer.getIntellect());;
+			pool--;
+			pointsLabel.setText(String.valueOf(pool));
+			return this;
+		}
+		else
+		{
+			insufficentStatLabel.setText("To Much Intellect");
+		}
+			
+		return null;
 	}
 
 	@FXML
 	public Object minusIntellect()
 	{
 
-		return this;
+		if (pool >= 0 && currentPlayer.getIntellect() > 0)
+		{
+			currentPlayer.intDown();
+			intSlider.setValue(currentPlayer.getIntellect());;
+			pool++;
+			pointsLabel.setText(String.valueOf(pool));
+			return this;
+		}
+		else if (currentPlayer.getIntellect() == 0)
+		{
+			insufficentStatLabel.setText("Not Enough Intellect");
+		}
+		
+		return null;
 	}
 
 	@FXML

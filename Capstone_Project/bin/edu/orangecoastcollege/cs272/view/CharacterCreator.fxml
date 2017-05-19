@@ -35,8 +35,7 @@
       <Button layoutX="333.0" layoutY="89.0" mnemonicParsing="false" onAction="#minusImage" text="-" />
       <Slider fx:id="strSlider" disable="true" layoutX="424.0" layoutY="204.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" value="5.0" />
       <Button layoutX="383.0" layoutY="207.0" mnemonicParsing="false" onAction="#plusStrength" text="+" />
-      <Slider disable="true" layoutX="424.0" layoutY="253.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" value="5.0" />
-      <Slider disable="true" layoutX="424.0" layoutY="304.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" value="5.0" />
+      <Slider fx:id="dexSlider" disable="true" layoutX="424.0" layoutY="253.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" value="5.0" />
       <Button layoutX="383.0" layoutY="256.0" mnemonicParsing="false" onAction="#plusDexterity" text="+" />
       <Button layoutX="383.0" layoutY="310.0" mnemonicParsing="false" onAction="#plusIntellect" text="+" />
       <Button layoutX="344.0" layoutY="310.0" mnemonicParsing="false" onAction="#minusIntellect" text="-" />
@@ -73,5 +72,6 @@
          </font>
       </Label>
       <Label fx:id="insufficentStatLabel" layoutX="354.0" layoutY="177.0" prefHeight="17.0" prefWidth="212.0" textFill="#eb0c0c" />
+      <Slider fx:id="intSlider" disable="true" layoutX="424.0" layoutY="307.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" value="5.0" />
    </children>
 </Pane>
