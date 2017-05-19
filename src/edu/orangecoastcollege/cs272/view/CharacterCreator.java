@@ -41,6 +41,8 @@ public class CharacterCreator {
 	@FXML
 	private Label tooMuchIntellectError;
 	
+	@FXML
+	private Label notEnoughIntellectError;
 
 	@FXML
 	private Button plusStrength;
