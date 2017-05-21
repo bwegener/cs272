@@ -28,9 +28,7 @@ public class Load {
 	@FXML
 	public Object optionsScene()
 	{
-		ViewNavigator.prevScene = ViewNavigator.LOAD;
-		ViewNavigator.prevTitle = "Load Save";
-		ViewNavigator.loadScene("Options", ViewNavigator.OPTIONS_SCENE);
+		ViewNavigator.loadScene("Player Stats", ViewNavigator.STATS_SCENE);
 		return this;
 	}
 	

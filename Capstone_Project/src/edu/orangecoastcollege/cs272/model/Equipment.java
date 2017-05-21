@@ -5,14 +5,27 @@ public class Equipment {
 	private String mName;
 	private int mDamage;
 	private int mDefense;
-	
-	public Equipment(int id, String name, int damage, int defense)
-	{
+	private int mStrength;
+	private int mDexterity;
+	private int mIntellect;
+
+	public Equipment(int id, String name, int damage, int defense, int mStrength, int mDexterity, int mIntellect) {
+
 		super();
 		mId = id;
 		mName = name;
 		mDamage = damage;
 		mDefense = defense;
+		this.mStrength = mStrength;
+		this.mDexterity = mDexterity;
+		this.mIntellect = mIntellect;
+	}
+	public Equipment(int id, String name, int damage, int defense)
+	{
+		this(id, name, damage, defense, 0, 0, 0);
+	}
+	public Equipment(){
+		this(0,"",0,0,0,0,0);
 	}
 
 	public int getId() {
@@ -42,7 +55,26 @@ public class Equipment {
 	public void setDefense(int defense) {
 		mDefense = defense;
 	}
+	
 
+	public int getStrength() {
+		return mStrength;
+	}
+	public void setStrength(int mStrength) {
+		this.mStrength = mStrength;
+	}
+	public int getDexterity() {
+		return mDexterity;
+	}
+	public void setDexterity(int mDexterity) {
+		this.mDexterity = mDexterity;
+	}
+	public int getIntellect() {
+		return mIntellect;
+	}
+	public void setIntellect(int mIntellect) {
+		this.mIntellect = mIntellect;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;

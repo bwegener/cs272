@@ -26,7 +26,7 @@
             <Font size="15.0" />
          </font>
       </TextField>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="377.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="characterFace" fitHeight="150.0" fitWidth="200.0" layoutX="377.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../Images/face1.jpeg" />
          </image>

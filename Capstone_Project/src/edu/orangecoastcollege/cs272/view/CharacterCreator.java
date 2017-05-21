@@ -1,19 +1,25 @@
 package edu.orangecoastcollege.cs272.view;
 
-import edu.orangecoastcollege.cs272.controller.Controller;
+import java.io.File;
+
 import edu.orangecoastcollege.cs272.model.Player;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class CharacterCreator {
-
-
-    private static Controller controller = Controller.getInstance();
+	
+	// Call CharacterCreater.currentPlayer used to add to database when saving
+    public static Player currentPlayer = new Player();
+    
+    
     private int pool = 10;
-    private Player currentPlayer = new Player();
+    private int characterPosition = 0;
+    private String[] characterArray = new String[]{"face1.jpeg","face2.png","face3.png"};
     
     @FXML
     private Label pointsLabel;
@@ -47,7 +53,8 @@ public class CharacterCreator {
 	private Slider dexSlider;
 	@FXML
 	private Slider intSlider;
-
+	@FXML
+	private ImageView characterFace;
 
 	@FXML
 	public Object optionsScene()
@@ -61,7 +68,7 @@ public class CharacterCreator {
 	/*
 	 * IDEA: set start button to be invisible till name is entered.
 	 */
-
+	
 	@FXML
 	public Object start()
 	{
@@ -196,20 +203,39 @@ public class CharacterCreator {
 		
 		return null;
 	}
-
+	
+	 // Created by Duong Tran
 	@FXML
 	public Object plusImage()
 	{
+		characterPosition +=1;
+		if(characterPosition < characterArray.length)
 
+			changeImage(characterArray[characterPosition]);
+		else{
+			characterPosition = 0;
+			changeImage(characterArray[0]);
+		}
 		return this;
 	}
-
+	 // Created by Duong Tran
 	@FXML
 	public Object minusImage()
 	{
-
+		characterPosition -=1;
+		if(characterPosition >= 0)
+			changeImage(characterArray[characterPosition]);
+		else{
+			characterPosition = characterArray.length - 1;
+			changeImage(characterArray[characterArray.length-1]);
+		}
 		return this;
 	}
-
+	// Created by Duong Tran
+    private ImageView changeImage(String face){
+    	Image character = new Image((new File("Images/" + face).toURI().toString()));
+    	characterFace.setImage(character);
+        return characterFace;
+    }
 
 }
