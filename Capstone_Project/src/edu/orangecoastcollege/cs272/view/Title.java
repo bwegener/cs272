@@ -10,7 +10,13 @@ public class Title {
 		ViewNavigator.loadScene("Load", ViewNavigator.CHARACTER_CREATOR);
 		return this;
 	}
-	
+	@FXML
+	public Object Load()
+	{
+		ViewNavigator.prevScene = ViewNavigator.TITLE;
+		ViewNavigator.loadScene("Load", ViewNavigator.LOAD);
+		return this;
+	}
 	@FXML
 	public Object quit()
 	{

@@ -28,7 +28,7 @@ public class Load {
 	@FXML
 	public Object optionsScene()
 	{
-		ViewNavigator.loadScene("Player Stats", ViewNavigator.STATS_SCENE);
+		ViewNavigator.loadScene("Player Stats", ViewNavigator.prevScene);
 		return this;
 	}
 	

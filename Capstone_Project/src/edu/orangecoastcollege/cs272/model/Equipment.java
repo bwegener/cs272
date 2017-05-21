@@ -1,5 +1,9 @@
 package edu.orangecoastcollege.cs272.model;
-
+/*
+ * Created by Khang, and Brian
+ * Merged and updated by Duong Tran
+ * May 20, 2017
+ */
 public class Equipment {
 	private int mId;
 	private String mName;
@@ -83,6 +87,9 @@ public class Equipment {
 		result = prime * result + mDefense;
 		result = prime * result + mId;
 		result = prime * result + ((mName == null) ? 0 : mName.hashCode());
+		result = prime * result + mIntellect;
+		result = prime * result + mDexterity;
+		result = prime * result + mStrength;
 		return result;
 	}
 
@@ -106,12 +113,19 @@ public class Equipment {
 				return false;
 		} else if (!mName.equals(other.mName))
 			return false;
+		if (mStrength != other.mStrength)
+			return false;
+		if (mDexterity != other.mDexterity)
+			return false;
+		if (mIntellect != other.mIntellect)
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Equipment [mId=" + mId + ", mName=" + mName + ", mDamage=" + mDamage + ", mDefense=" + mDefense + "]";
+		return "Equipment [mId=" + mId + ", Name=" + mName + ", Damage=" + mDamage + ", Defense=" + mDefense+ ", Strength=" + mStrength + ", Dexterity=" + mDexterity
+				+ ", Intellect=" + mIntellect + "]";
 	}
 	
 }

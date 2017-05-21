@@ -1,6 +1,5 @@
 package edu.orangecoastcollege.cs272.view;
 
-import edu.orangecoastcollege.cs272.controller.Controller;
 import edu.orangecoastcollege.cs272.model.Player;
 import javafx.fxml.FXML;
 /**
@@ -10,7 +9,6 @@ import javafx.fxml.FXML;
  *
  */
 public class Save {
-	private Controller controller = Controller.getInstance();
 	private String name = CharacterCreator.currentPlayer.getName();
 	private int strStat = CharacterCreator.currentPlayer.getStrength();
 	private int dexStat = CharacterCreator.currentPlayer.getDexterity();
@@ -41,7 +39,7 @@ public class Save {
 	@FXML
 	public Object optionsScene()
 	{
-		ViewNavigator.loadScene("Player Stats", ViewNavigator.STATS_SCENE);
+		ViewNavigator.loadScene(ViewNavigator.prevTitle, ViewNavigator.prevScene);
 		return this;
 	}
 }

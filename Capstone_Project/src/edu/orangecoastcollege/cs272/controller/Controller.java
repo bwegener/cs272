@@ -13,6 +13,7 @@ import edu.orangecoastcollege.cs272.model.Enemy;
 import edu.orangecoastcollege.cs272.model.Equipment;
 import edu.orangecoastcollege.cs272.model.Player;
 import edu.orangecoastcollege.cs272.model.Quest;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Controller {
@@ -22,22 +23,25 @@ public class Controller {
 	private static final String DB_NAME = "text_rpg.db";
 
 	private static final String PLAYER_TABLE_NAME = "player";
-	private static final String[] PLAYER_FIELD_NAMES = { "id", "name", "strength", "dexterity", "intellect", "health", "equipment" };
+	private static final String[] PLAYER_FIELD_NAMES = { "id", "name", "strength", "dexterity", "intellect", "health", "face" };
 	private static final String[] PLAYER_FIELD_TYPES = {"INTEGER PRIMARY KEY", "TEXT", "INTEGER", "INTEGER", "INTEGER", "INTEGER", "TEXT" };
 
 	private static final String ENEMY_TABLE_NAME = "enemy";
 	private static final String[] ENEMY_FIELD_NAMES = { "id", "name", "damage", "defense", "health", "equipment"};
 	private static final String[] ENEMY_FIELD_TYPES = { "INTEGER PRIMARY KEY", "TEXT", "INTEGER", "INTEGER", "INTEGER", "TEXT"};
-
 	private static final String ENEMY_DATA_FILE = "enemy.csv";
 
 	private static final String EQUIPMENT_TABLE_NAME = "equipment";
 	private static final String[] EQUIPMENT_FIELD_NAMES = { "id", "name", "damage", "defense"};
 	private static final String[] EQUIPMENT_FIELD_TYPES = {"INTEGER PRIMARY KEY", "TEXT", "INTEGER", "INTEGER"};
-
 	private static final String EQUIPMENT_DATA_FILE = "equipment.csv";
 
 	// PLAYER EQUIPMENT == RELATIONAL DATABASE
+	private static final String PLAYER_EQUIPMENT = "player_equipment";
+	private static final String[] PLAYER_EQUIPMENT_NAMES = {"user_id", "equipment_id"};
+	private static final String[] PLAYER_EQUIPMENT_TYPES = {"INTEGER", "INTEGER"};
+	
+	
 
 	private static final String QUEST_TABLE_NAME = "quest";
 	private static final String[] QUEST_FIELD_NAMES = {"id", "name", "completionRequirement", "description"};
@@ -52,9 +56,11 @@ public class Controller {
 	private static final String ATTACK_DATA_FILE = "attack.csv";
 
 	// PLAYER ATTACKS == RELATIONAL DATABASE
+	private static final String PLAYER_ATTACKS = "player_attacks";
+	private static final String[] PLAYER_ATTACKS_NAMES = {"user_id", "ability_id"};
+	private static final String[] PLAYER_ATTACKS_TYPES = {"INTEGER", "INTEGER"};
 
 	// SAVE FILE???
-
 	private Player mCurrentPlayer;
 	private Enemy mEnemy;
 	private DBModel mPlayerDB;
@@ -86,7 +92,13 @@ public class Controller {
 		if(theOne == null)
 		{
 			theOne = new Controller();
-
+			theOne.mAllPlayersList = FXCollections.observableArrayList();
+			theOne.mAllEnemiesList = FXCollections.observableArrayList();
+			theOne.mAllEquipmentList = FXCollections.observableArrayList();
+			theOne.mAllQuestsList = FXCollections.observableArrayList();
+			theOne.mAllAttacksList = FXCollections.observableArrayList();
+			
+			
 			try {
 				theOne.mPlayerDB = new DBModel(DB_NAME, PLAYER_TABLE_NAME, PLAYER_FIELD_NAMES, PLAYER_FIELD_TYPES);
 
@@ -98,12 +110,12 @@ public class Controller {
 					int strength = Integer.parseInt(values.get(2));
 					int dexterity = Integer.parseInt(values.get(3));
 					int intellect = Integer.parseInt(values.get(4));
-					int health = Integer.parseInt(values.get(5));
-					String equipment = values.get(6);
+					String face = values.get(5);
+					theOne.mAllPlayersList.add(new Player(id, name, intellect, strength, dexterity, face));
 				}
 
+				
 				theOne.mEnemyDB = new DBModel(DB_NAME, ENEMY_TABLE_NAME, ENEMY_FIELD_NAMES, ENEMY_FIELD_TYPES);
-
 				theOne.initializeEnemyDBFromFile();
 				resultsList = theOne.mEnemyDB.getAllRecords();
 				for(ArrayList<String> values : resultsList)
@@ -157,6 +169,9 @@ public class Controller {
 					int damage = Integer.parseInt(values.get(5));
 					theOne.mAllAttacksList.add(new Attack(id, name, strengthRequired, dexterityRequired, intellectRequired, damage));
 				}
+
+				theOne.mPlayerEquipmentDB = new DBModel(DB_NAME,PLAYER_EQUIPMENT,PLAYER_EQUIPMENT_NAMES,PLAYER_EQUIPMENT_TYPES);
+				theOne.mPlayerAttackDB = new DBModel(DB_NAME,PLAYER_ATTACKS,PLAYER_ATTACKS_NAMES,PLAYER_ATTACKS_TYPES);
 			}
 			catch (SQLException e)
 			{

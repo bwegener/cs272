@@ -4,7 +4,6 @@ import java.io.File;
 
 import edu.orangecoastcollege.cs272.model.Player;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
@@ -26,27 +25,9 @@ public class CharacterCreator {
 	@FXML
 	private TextField nameTF;
 	@FXML
-	private Button startButton;
-	@FXML
 	private Label nameErrorLabel;
 	@FXML
 	private Label insufficentStatLabel;
-	@FXML
-	private Button plusStrength;
-	@FXML
-	private Button minusStrength;
-	@FXML
-	private Button plusDexterity;
-	@FXML
-	private Button minusDexterity;
-	@FXML
-	private Button plusIntellect;
-	@FXML
-	private Button minusIntellect;
-	@FXML
-	private Button plusImage;
-	@FXML
-	private Button minusImage;
 	@FXML
 	private Slider strSlider;
 	@FXML

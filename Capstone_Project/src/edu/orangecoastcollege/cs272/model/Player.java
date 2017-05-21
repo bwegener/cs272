@@ -170,7 +170,7 @@ package edu.orangecoastcollege.cs272.model;
 		 * @return
 		 */
 		public void intDown(){
-			mStrStat -= 1;
+			mIntStat -= 1;
 			this.calculateHealth();
 		}
 		/**

@@ -19,34 +19,35 @@
             <Font size="23.0" />
          </font>
       </Label>
-      <Label layoutX="112.0" layoutY="205.0" text="Strength">
+      <Label layoutX="103.0" layoutY="205.0" text="Strength">
          <font>
             <Font size="22.0" />
          </font>
       </Label>
-      <Label layoutX="112.0" layoutY="239.0" text="Dexterity">
+      <Label layoutX="103.0" layoutY="239.0" text="Dexterity">
          <font>
             <Font size="22.0" />
          </font>
       </Label>
-      <Label layoutX="112.0" layoutY="272.0" text="Intellect">
+      <Label layoutX="103.0" layoutY="272.0" text="Intellect">
          <font>
             <Font size="22.0" />
          </font>
       </Label>
-      <Button layoutX="231.0" layoutY="326.0" mnemonicParsing="false" onAction="#resume" text="Continue" />
-      <ImageView fx:id="faceIV" fitHeight="150.0" fitWidth="200.0" layoutX="408.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true" />
+      <Button layoutX="112.0" layoutY="326.0" mnemonicParsing="false" onAction="#resume" text="Continue" />
+      <ImageView fx:id="faceIV" fitHeight="150.0" fitWidth="200.0" layoutX="375.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true" />
       <Label fx:id="damageLabel" layoutX="215.0" layoutY="104.0" prefHeight="27.0" prefWidth="123.0" />
-      <Label fx:id="strengthLabel" layoutX="227.0" layoutY="208.0" prefHeight="27.0" prefWidth="123.0" />
-      <Label fx:id="dexterityLabel" layoutX="227.0" layoutY="240.0" prefHeight="27.0" prefWidth="123.0" />
-      <Label fx:id="intellectLabel" layoutX="227.0" layoutY="271.0" prefHeight="27.0" prefWidth="123.0" />
+      <Label fx:id="strengthLabel" layoutX="218.0" layoutY="208.0" prefHeight="27.0" prefWidth="123.0" />
+      <Label fx:id="dexterityLabel" layoutX="218.0" layoutY="240.0" prefHeight="27.0" prefWidth="123.0" />
+      <Label fx:id="intellectLabel" layoutX="218.0" layoutY="271.0" prefHeight="27.0" prefWidth="123.0" />
       <Label layoutX="101.0" layoutY="132.0" prefHeight="42.0" prefWidth="130.0" text="Defense">
          <font>
             <Font size="23.0" />
          </font>
       </Label>
       <Label fx:id="defenseLabel" layoutX="211.0" layoutY="139.0" prefHeight="27.0" prefWidth="123.0" />
-      <Button fx:id="saveBTN" layoutX="408.0" layoutY="326.0" mnemonicParsing="false" onAction="#save" prefHeight="25.0" prefWidth="64.0" text="Save" />
-      <Button fx:id="loadBTN" layoutX="325.0" layoutY="326.0" mnemonicParsing="false" onAction="#load" prefHeight="25.0" prefWidth="64.0" text="Load" />
+      <Button fx:id="saveBTN" layoutX="502.0" layoutY="326.0" mnemonicParsing="false" onAction="#save" prefHeight="25.0" prefWidth="64.0" text="Save" />
+      <Button fx:id="loadBTN" layoutX="419.0" layoutY="326.0" mnemonicParsing="false" onAction="#load" prefHeight="25.0" prefWidth="64.0" text="Load" />
+      <Button layoutX="185.0" layoutY="326.0" mnemonicParsing="false" onAction="#equipment" prefHeight="25.0" prefWidth="74.0" text="Equipment" />
    </children>
 </Pane>

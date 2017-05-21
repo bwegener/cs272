@@ -53,6 +53,12 @@ public class StatsScene implements Initializable  {
 
 	}
 	@FXML
+	public Object equipment()
+	{
+		ViewNavigator.loadScene("Equipment", ViewNavigator.VIEW_INVENTORY);
+		return this;
+	}	
+	@FXML
 	public Object resume()
 	{
 		ViewNavigator.loadScene(ViewNavigator.prevTitle, ViewNavigator.prevScene);
