@@ -183,7 +183,7 @@ public class Controller {
 	private int  initializeEnemyDBFromFile() throws SQLException {
 		int recordsCreated = 0;
 
-		if(theOne.mPlayerDB.getRecordCount() > 0) return 0;
+		if(theOne.mEnemyDB.getRecordCount() > 0) return 0;
 
 		try {
 			Scanner fileScanner = new Scanner(new File(ENEMY_DATA_FILE));
@@ -213,7 +213,7 @@ public class Controller {
 	private int initializeEquipmentDBFromFile() throws SQLException {
 		int recordsCreated = 0;
 
-		if(theOne.mPlayerDB.getRecordCount() > 0) return 0;
+		if(theOne.mEquipmentDB.getRecordCount() > 0) return 0;
 
 		try {
 			Scanner fileScanner = new Scanner(new File(EQUIPMENT_DATA_FILE));
@@ -244,7 +244,7 @@ public class Controller {
 	private int initializeQuestDBFromFile() throws SQLException {
 		int recordsCreated = 0;
 
-		if(theOne.mPlayerDB.getRecordCount() > 0) return 0;
+		if(theOne.mQuestDB.getRecordCount() > 0) return 0;
 
 		try {
 			Scanner fileScanner = new Scanner(new File(QUEST_DATA_FILE));
@@ -272,7 +272,7 @@ public class Controller {
 	private int initializeAttackDBFromFile() throws SQLException {
 		int recordsCreated = 0;
 
-		if(theOne.mPlayerDB.getRecordCount() > 0) return 0;
+		if(theOne.mAttackDB.getRecordCount() > 0) return 0;
 
 		try {
 			Scanner fileScanner = new Scanner(new File(ATTACK_DATA_FILE));
