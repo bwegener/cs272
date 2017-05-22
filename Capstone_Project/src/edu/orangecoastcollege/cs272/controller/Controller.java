@@ -27,34 +27,30 @@ public class Controller {
 	private static final String[] PLAYER_FIELD_TYPES = {"INTEGER PRIMARY KEY", "TEXT", "INTEGER", "INTEGER", "INTEGER", "INTEGER", "TEXT" };
 
 	private static final String ENEMY_TABLE_NAME = "enemy";
-	private static final String[] ENEMY_FIELD_NAMES = { "id", "name", "damage", "defense", "health", "equipment"};
-	private static final String[] ENEMY_FIELD_TYPES = { "INTEGER PRIMARY KEY", "TEXT", "INTEGER", "INTEGER", "INTEGER", "TEXT"};
+	private static final String[] ENEMY_FIELD_NAMES = { "id", "name", "damage", "defense", "health"};
+	private static final String[] ENEMY_FIELD_TYPES = { "INTEGER PRIMARY KEY", "TEXT", "INTEGER", "INTEGER", "INTEGER"};
 	private static final String ENEMY_DATA_FILE = "enemy.csv";
 
 	private static final String EQUIPMENT_TABLE_NAME = "equipment";
-	private static final String[] EQUIPMENT_FIELD_NAMES = { "id", "name", "damage", "defense"};
-	private static final String[] EQUIPMENT_FIELD_TYPES = {"INTEGER PRIMARY KEY", "TEXT", "INTEGER", "INTEGER"};
+	private static final String[] EQUIPMENT_FIELD_NAMES = { "id", "name", "damage", "defense","strength","dexterity","intellect"};
+	private static final String[] EQUIPMENT_FIELD_TYPES = {"INTEGER PRIMARY KEY", "TEXT", "INTEGER", "INTEGER", "INTEGER", "INTEGER", "INTEGER"};
 	private static final String EQUIPMENT_DATA_FILE = "equipment.csv";
-
-	// PLAYER EQUIPMENT == RELATIONAL DATABASE
-	private static final String PLAYER_EQUIPMENT = "player_equipment";
-	private static final String[] PLAYER_EQUIPMENT_NAMES = {"user_id", "equipment_id"};
-	private static final String[] PLAYER_EQUIPMENT_TYPES = {"INTEGER", "INTEGER"};
-	
-	
 
 	private static final String QUEST_TABLE_NAME = "quest";
 	private static final String[] QUEST_FIELD_NAMES = {"id", "name", "completionRequirement", "description"};
 	private static final String[] QUEST_FIELD_TYPES = {"INTEGER PRIMARY KEY", "TEXT", "TEXT", "TEXT"};
-
 	private static final String QUEST_DATA_FILE = "quest.csv";
 
 	private static final String ATTACK_TABLE_NAME = "attack";
 	private static final String[] ATTACK_FIELD_NAMES = {"id", "name", "strengthRequired", "dexterityRequired", "intellectRequired", "damage"};
 	private static final String[] ATTACK_FIELD_TYPES = {"INTEGER PRIMARY KEY", "TEXT", "INTEGER", "INTEGER", "INTEGER", "INTEGER"};
-
 	private static final String ATTACK_DATA_FILE = "attack.csv";
 
+	
+	// PLAYER EQUIPMENT == RELATIONAL DATABASE
+	private static final String PLAYER_EQUIPMENT = "player_equipment";
+	private static final String[] PLAYER_EQUIPMENT_NAMES = {"user_id", "equipment_id"};
+	private static final String[] PLAYER_EQUIPMENT_TYPES = {"INTEGER", "INTEGER"};
 	// PLAYER ATTACKS == RELATIONAL DATABASE
 	private static final String PLAYER_ATTACKS = "player_attacks";
 	private static final String[] PLAYER_ATTACKS_NAMES = {"user_id", "ability_id"};
@@ -125,8 +121,7 @@ public class Controller {
 					int damage = Integer.parseInt(values.get(2));
 					int defense = Integer.parseInt(values.get(3));
 					int health = Integer.parseInt(values.get(4));
-					String equipment = values.get(5);
-					theOne.mAllEnemiesList.add(new Enemy(id, name, damage, defense, health, equipment));
+					theOne.mAllEnemiesList.add(new Enemy(id, name, damage, defense, health));
 				}
 
 				theOne.mEquipmentDB = new DBModel(DB_NAME, EQUIPMENT_TABLE_NAME, EQUIPMENT_FIELD_NAMES, EQUIPMENT_FIELD_TYPES);
@@ -139,7 +134,10 @@ public class Controller {
 					String name = values.get(1);
 					int damage = Integer.parseInt(values.get(2));
 					int defense = Integer.parseInt(values.get(3));
-					theOne.mAllEquipmentList.add(new Equipment(id, name, damage, defense));
+					int strength = Integer.parseInt(values.get(4));
+					int dexterity = Integer.parseInt(values.get(5));
+					int intellect = Integer.parseInt(values.get(6));
+					theOne.mAllEquipmentList.add(new Equipment(id, name, damage, defense,strength,dexterity,intellect));
 				}
 
 				theOne.mQuestDB = new DBModel(DB_NAME, QUEST_TABLE_NAME, QUEST_FIELD_NAMES, QUEST_FIELD_TYPES);
@@ -182,7 +180,7 @@ public class Controller {
 		return theOne;
 	}
 
-	private int initializeEnemyDBFromFile() throws SQLException {
+	private int  initializeEnemyDBFromFile() throws SQLException {
 		int recordsCreated = 0;
 
 		if(theOne.mPlayerDB.getRecordCount() > 0) return 0;
@@ -196,11 +194,10 @@ public class Controller {
 				String[] values = new String[ENEMY_FIELD_NAMES.length-1];
 
 				// IS THIS JUST FOR STRINGS?
-				values[0] = data[1].replaceAll("'", "''");
-				values[1] = data[2];
-				values[2] = data[3];
-				values[3] = data[4];
-				values[4] = data[5];
+				values[0] = data[0].replaceAll("'", "''");
+				values[1] = data[1];
+				values[2] = data[2];
+				values[3] = data[3];
 				theOne.mEnemyDB.createRecord(Arrays.copyOfRange(ENEMY_FIELD_NAMES, 1, ENEMY_FIELD_NAMES.length), values);
 				recordsCreated++;
 			}
@@ -213,8 +210,7 @@ public class Controller {
 		return recordsCreated;
 
 	}
-
-	private int initializeQuestDBFromFile() throws SQLException {
+	private int initializeEquipmentDBFromFile() throws SQLException {
 		int recordsCreated = 0;
 
 		if(theOne.mPlayerDB.getRecordCount() > 0) return 0;
@@ -228,12 +224,13 @@ public class Controller {
 				String[] values = new String[EQUIPMENT_FIELD_NAMES.length-1];
 
 				// IS THIS JUST FOR STRINGS?
-				values[0] = data[1].replaceAll("'", "''");
-				values[1] = data[2];
-				values[2] = data[3];
-				values[3] = data[4];
-				values[4] = data[5];
-				theOne.mQuestDB.createRecord(Arrays.copyOfRange(EQUIPMENT_FIELD_NAMES, 1, EQUIPMENT_FIELD_NAMES.length), values);
+				values[0] = data[0].replaceAll("'", "''");
+				values[1] = data[1];
+				values[2] = data[2];
+				values[3] = data[3];
+				values[4] = data[4];
+				values[5] = data[5];
+				theOne.mEquipmentDB.createRecord(Arrays.copyOfRange(EQUIPMENT_FIELD_NAMES, 1, EQUIPMENT_FIELD_NAMES.length), values);
 				recordsCreated++;
 			}
 			fileScanner.close();
@@ -244,8 +241,7 @@ public class Controller {
 		}
 		return recordsCreated;
 	}
-
-	private int initializeEquipmentDBFromFile() throws SQLException {
+	private int initializeQuestDBFromFile() throws SQLException {
 		int recordsCreated = 0;
 
 		if(theOne.mPlayerDB.getRecordCount() > 0) return 0;
@@ -259,12 +255,10 @@ public class Controller {
 				String[] values = new String[QUEST_FIELD_NAMES.length-1];
 
 				// IS THIS JUST FOR STRINGS?
-				values[0] = data[1].replaceAll("'", "''"); // NEED FOR STRINGS
-				values[1] = data[2];
-				values[2] = data[3];
-				values[3] = data[4];
-				values[4] = data[5];
-				theOne.mEnemyDB.createRecord(Arrays.copyOfRange(QUEST_FIELD_NAMES, 1, QUEST_FIELD_NAMES.length), values);
+				values[0] = data[0].replaceAll("'", "''"); // NEED FOR STRINGS
+				values[1] = data[1];
+				values[2] = data[2];
+				theOne.mQuestDB.createRecord(Arrays.copyOfRange(QUEST_FIELD_NAMES, 1, QUEST_FIELD_NAMES.length), values);
 				recordsCreated++;
 			}
 			fileScanner.close();
@@ -275,7 +269,6 @@ public class Controller {
 		}
 		return recordsCreated;
 	}
-
 	private int initializeAttackDBFromFile() throws SQLException {
 		int recordsCreated = 0;
 
@@ -290,12 +283,12 @@ public class Controller {
 				String[] values = new String[ATTACK_FIELD_NAMES.length-1];
 
 				// IS THIS JUST FOR STRINGS?
-				values[0] = data[1].replaceAll("'", "''"); // NEED FOR STRINGS
-				values[1] = data[2];
-				values[2] = data[3];
-				values[3] = data[4];
-				values[4] = data[5];
-				theOne.mEnemyDB.createRecord(Arrays.copyOfRange(ATTACK_FIELD_NAMES, 1, ATTACK_FIELD_NAMES.length), values);
+				values[0] = data[0].replaceAll("'", "''"); // NEED FOR STRINGS
+				values[1] = data[1];
+				values[2] = data[2];
+				values[3] = data[3];
+				values[4] = data[4];
+				theOne.mAttackDB.createRecord(Arrays.copyOfRange(ATTACK_FIELD_NAMES, 1, ATTACK_FIELD_NAMES.length), values);
 				recordsCreated++;
 			}
 			fileScanner.close();
@@ -307,6 +300,9 @@ public class Controller {
 		return recordsCreated;
 	}
 
+	
+	
+	
 	public Player getCurrentPlayer()
 	{
 		return mCurrentPlayer;
@@ -341,7 +337,6 @@ public class Controller {
 	{
 		return theOne.mAllAttacksList;
 	}
-
 	/*
 	 * HOW TO MAKE MUSIC WORK BY EACH SCENE
 	 */
@@ -361,10 +356,172 @@ public class Controller {
 
 	 * HOW TO MAKE POINTS
 	 */
+	
+	/**
+	 * Duong Tran
+	 * Get the list of equipments the player is carrying
+	 */
+	public ObservableList<Equipment> getEquipmentForPlayers(){
+		ObservableList<Equipment> userEquipment = FXCollections.observableArrayList();
+		if(mCurrentPlayer !=null){
+			try{
+				ArrayList<ArrayList<String>> resultList = theOne.mPlayerEquipmentDB.getRecord(String.valueOf(mCurrentPlayer.getID()));
+				for (ArrayList<String> values: resultList){
+					int equipId = Integer.parseInt(values.get(0));
+					for(Equipment equip : theOne.mAllEquipmentList)
+						if(equip.getId() == equipId)
+							userEquipment.add(equip);
+				}
+			}
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return userEquipment;
+		
+	}
+	/**
+	 * Duong Tran
+	 * Add the Equipment to the players inventory
+	 */
+	public boolean addEquipmentToInventory(Equipment selectedEquipment){
+		ObservableList<Equipment> playerEquipment = theOne.getEquipmentForPlayers();
+		if(playerEquipment.contains(selectedEquipment))
+			return false;
+		
+		String[] values = {String.valueOf(mCurrentPlayer.getID()), String.valueOf(selectedEquipment.getId())};
+		try{
+			this.mPlayerEquipmentDB.createRecord(PLAYER_EQUIPMENT_NAMES, values);
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return false;
+	}
+	/**
+	 * Duong Tran
+	 * Get the list of Attacks the player is carrying
+	 */
+	public ObservableList<Attack> getAbilityForPlayers(){
+		ObservableList<Attack> userAttack = FXCollections.observableArrayList();
+		if(mCurrentPlayer !=null){
+			try{
+				ArrayList<ArrayList<String>> resultList = theOne.mPlayerAttackDB.getRecord(String.valueOf(mCurrentPlayer.getID()));
+				for (ArrayList<String> values: resultList){
+					int equipId = Integer.parseInt(values.get(0));
+					for(Attack attack : theOne.mAllAttacksList)
+						if(attack.getId() == equipId)
+							userAttack.add(attack);
+				}
+			}
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return userAttack;
+		
+	}
+	/**
+	 * Duong Tran
+	 * Add the Attack to the players inventory
+	 */
+	public boolean addAbilityToInventory(Attack selectedAbility){
+		ObservableList<Attack> playerAttack = theOne.getAbilityForPlayers();
+		if(playerAttack.contains(selectedAbility))
+			return false;
+		
+		String[] values = {String.valueOf(mCurrentPlayer.getID()), String.valueOf(selectedAbility.getId())};
+		try{
+			this.mPlayerAttackDB.createRecord(PLAYER_ATTACKS_NAMES, values);
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return false;
+	}
 
+	/**
+	 * Duong Tran
+	 * Load the Game
+	 */
+	public String loadUser(int key){
+		for(Player p : theOne.mAllPlayersList)
+			if(p.getID() == key){
+				//ArrayList<ArrayList<String>> rs = theOne.mPlayerDB.getRecord(String.valueOf(p.getID()));
+				mCurrentPlayer = p;
+				return "SUCCESS";
+			}
+		return "Player not Found.";
+	}
+	/**
+	 * Duong Tran
+	 * Save Player
+	 */
+	public void savePlayer(String key){
+		String[] thisPlayer = new String[]{String.valueOf(mCurrentPlayer.getID()), mCurrentPlayer.getName(), 
+											String.valueOf(mCurrentPlayer.getStrength()),
+											String.valueOf(mCurrentPlayer.getDexterity()),
+											String.valueOf(mCurrentPlayer.getIntellect()),
+											String.valueOf(mCurrentPlayer.getHealth()),
+											mCurrentPlayer.getFace()};
+		
+		try {
+			System.out.println(theOne.mPlayerDB.getRecordCount());
+			theOne.mPlayerDB.updateRecord(key, PLAYER_FIELD_NAMES, thisPlayer);
+			theOne.mAllPlayersList.set(Integer.parseInt(key), mCurrentPlayer);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
-
-
-
+	//theOne.mPlayerDB.createRecord(Arrays.copyOfRange(PLAYER_FIELD_NAMES, 1, PLAYER_FIELD_NAMES.length), thisPlayer);
+	//theOne.mAllPlayersList.add(mCurrentPlayer);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

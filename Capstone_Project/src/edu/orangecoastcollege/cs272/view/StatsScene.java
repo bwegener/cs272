@@ -4,6 +4,7 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import edu.orangecoastcollege.cs272.controller.Controller;
 import edu.orangecoastcollege.cs272.model.Equipment;
 import edu.orangecoastcollege.cs272.model.Player;
 import javafx.fxml.FXML;
@@ -18,7 +19,8 @@ import javafx.scene.image.ImageView;
  *
  */
 public class StatsScene implements Initializable  {
-    private Player currentPlayer = new Player(1,"jojo",5,5,5);
+	Controller controller = Controller.getInstance();
+    private Player currentPlayer = controller.getCurrentPlayer();
     private Equipment currentEquipment = new Equipment();
 
     @FXML

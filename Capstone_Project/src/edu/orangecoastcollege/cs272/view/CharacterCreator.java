@@ -2,6 +2,7 @@ package edu.orangecoastcollege.cs272.view;
 
 import java.io.File;
 
+import edu.orangecoastcollege.cs272.controller.Controller;
 import edu.orangecoastcollege.cs272.model.Player;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -11,10 +12,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class CharacterCreator {
-	
+
+    Controller controller = Controller.getInstance();
 	// Call CharacterCreater.currentPlayer used to add to database when saving
     public static Player currentPlayer = new Player();
-    
     
     private int pool = 10;
     private int characterPosition = 0;
@@ -53,6 +54,7 @@ public class CharacterCreator {
 	@FXML
 	public Object start()
 	{
+		controller.setCurrentPlayer(currentPlayer);
 		String name = nameTF.getText();
 		//controller.getCurr
 		if(name.isEmpty())
@@ -65,7 +67,6 @@ public class CharacterCreator {
 			ViewNavigator.loadScene("Forest", ViewNavigator.INTRO_FOREST);
 			return this;
 		}
-
 		return null;
 	}
 
@@ -216,6 +217,7 @@ public class CharacterCreator {
     private ImageView changeImage(String face){
     	Image character = new Image((new File("Images/" + face).toURI().toString()));
     	characterFace.setImage(character);
+    	currentPlayer.setFace("Images/" + face);
         return characterFace;
     }
 

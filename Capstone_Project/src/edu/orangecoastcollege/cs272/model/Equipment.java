@@ -124,8 +124,8 @@ public class Equipment {
 
 	@Override
 	public String toString() {
-		return "Equipment [mId=" + mId + ", Name=" + mName + ", Damage=" + mDamage + ", Defense=" + mDefense+ ", Strength=" + mStrength + ", Dexterity=" + mDexterity
-				+ ", Intellect=" + mIntellect + "]";
+		return mName + ", Damage:" + mDamage + ", Defense:" + mDefense+ ", Strength:" + mStrength + ", Dexterity:" + mDexterity
+				+ ", Intellect:" + mIntellect;
 	}
 	
 }

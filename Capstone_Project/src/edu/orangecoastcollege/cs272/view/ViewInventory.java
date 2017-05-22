@@ -3,8 +3,11 @@ package edu.orangecoastcollege.cs272.view;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import edu.orangecoastcollege.cs272.controller.Controller;
+import edu.orangecoastcollege.cs272.model.Equipment;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.fxml.FXML;
 /**
  * Duong Tran
@@ -13,6 +16,7 @@ import javafx.fxml.FXML;
  *
  */
 public class ViewInventory implements Initializable {
+	private static Controller controller = Controller.getInstance();
 	@FXML
 	private Label headgear;
 	@FXML
@@ -21,11 +25,13 @@ public class ViewInventory implements Initializable {
 	private Label leggear;
 	@FXML
 	private Label weapon;
+	@FXML
+	private ListView<Equipment> allUserEquipmentLV;
 	
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
+		allUserEquipmentLV.setItems(controller.getAllEquipment());
 
 	}
 	@FXML
