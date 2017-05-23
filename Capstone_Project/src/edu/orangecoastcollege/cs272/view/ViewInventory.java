@@ -28,21 +28,26 @@ public class ViewInventory implements Initializable {
 	private Label weapon;
 	@FXML
 	private ListView<Equipment> allUserEquipmentLV;
-	@FXML
-	private ListView<Player> allPlayersLVB;
 	
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		allUserEquipmentLV.setItems(controller.getAllEquipment());
-		allPlayersLVB.setItems(controller.getAllPlayers());
+		allUserEquipmentLV.setItems(controller.getEquipmentForPlayers());
 	}
 	@FXML
 	public Object equip(){
+		Equipment testItem = allUserEquipmentLV.getSelectionModel().getSelectedItem();
+		if(testItem != null){
+			controller.setCurrentEquipment(testItem);
+			String equipName = testItem.getName();
+			weapon.setText(equipName);
+		}
 		return this;
 	}
 	@FXML
 	public Object unequip(){
+		controller.setCurrentEquipment(null);
+		weapon.setText("none");
 		return this;
 	}
 	@FXML

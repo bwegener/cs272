@@ -58,7 +58,7 @@ public class Controller {
 
 	// SAVE FILE???
 	private Player mCurrentPlayer;
-	private Enemy mEnemy;
+	private Equipment mCurrentEquipment;
 	private DBModel mPlayerDB;
 	private DBModel mEnemyDB;
 	private DBModel mEquipmentDB;
@@ -330,7 +330,15 @@ public class Controller {
 	{
 	    mCurrentPlayer = currentPlayer;
 	}
+	public Equipment getCurrentEquipment()
+	{
+		return mCurrentEquipment;
+	}
 
+	public void setCurrentEquipment(Equipment currentEquipment)
+	{
+	    mCurrentEquipment = currentEquipment;
+	}
 	public ObservableList<Player> getAllPlayers()
 	{
 		return theOne.mAllPlayersList;
@@ -374,7 +382,18 @@ public class Controller {
 
 	 * HOW TO MAKE POINTS
 	 */
-	
+	/**
+	 * Duong Tran
+	 * Get an item from the DB
+	 */
+	public Equipment getItem(String itemName){
+		for(Equipment e :theOne.mAllEquipmentList){
+			if(e.getName().equalsIgnoreCase(itemName)){
+				return e;
+			}
+		}
+		return null;
+	}
 	/**
 	 * Duong Tran
 	 * Get the list of equipments the player is carrying
@@ -488,49 +507,9 @@ public class Controller {
 		try {
 			theOne.mPlayerDB.updateRecord(String.valueOf(key), fields, values);
 			theOne.mAllPlayersList.set((key - 1), mCurrentPlayer);
-			//private static final String[] PLAYER_FIELD_NAMES = { "id", "name", "strength", "dexterity", "intellect", "health", "face" };
-			//private static final String[] PLAYER_FIELD_TYPES = {"INTEGER PRIMARY KEY", "TEXT", "INTEGER", "INTEGER", "INTEGER", "INTEGER", "TEXT" };
-			System.out.println(theOne.mPlayerDB.getRecord(String.valueOf(key)));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 }
