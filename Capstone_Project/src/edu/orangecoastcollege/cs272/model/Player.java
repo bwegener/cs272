@@ -67,6 +67,13 @@ package edu.orangecoastcollege.cs272.model;
 		 * Set the int stat of the mob or player object
 		 * @param intStat
 		 */
+		public void setName(String name) {
+			mName = name;
+		}
+		/**
+		 * Set the int stat of the mob or player object
+		 * @param intStat
+		 */
 		public void setIntellect(int intStat) {
 			mIntStat = intStat;
 		}
@@ -93,10 +100,11 @@ package edu.orangecoastcollege.cs272.model;
 		public Player()
 		{
 			mId = 1;
+			mName = "dummyName";
 		    mStrStat = 5;
 		    mDexStat = 5;
 		    mIntStat = 5;
-		    mFullHealth = 25;
+		    mFullHealth = 15;
 			mFace = "Images/face1.jpeg";
 		}
 		/**
@@ -205,7 +213,7 @@ package edu.orangecoastcollege.cs272.model;
 		}
 		public String toString() {
 			return "Name: " + mName + "\nInt: " + mIntStat + "\nStr: " + mStrStat
-					+ "\nDexStat: " + mDexStat + "\nHealth: " + mCurrentHealth;
+					+ "\nDexStat: " + mDexStat + "\nHealth: " + mCurrentHealth + "\nAppearance " + mFace;
 		}
 		@Override
 		public int hashCode() {

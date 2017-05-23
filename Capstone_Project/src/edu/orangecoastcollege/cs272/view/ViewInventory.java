@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import edu.orangecoastcollege.cs272.controller.Controller;
 import edu.orangecoastcollege.cs272.model.Equipment;
+import edu.orangecoastcollege.cs272.model.Player;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -27,12 +28,14 @@ public class ViewInventory implements Initializable {
 	private Label weapon;
 	@FXML
 	private ListView<Equipment> allUserEquipmentLV;
+	@FXML
+	private ListView<Player> allPlayersLVB;
 	
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		allUserEquipmentLV.setItems(controller.getAllEquipment());
-
+		allPlayersLVB.setItems(controller.getAllPlayers());
 	}
 	@FXML
 	public Object equip(){
