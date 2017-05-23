@@ -19,6 +19,16 @@ public class Enemy {
 		mHealth = health;
 		mEquipment = equipment;
 	}
+	public Enemy(int id, String name, int damage, int defense, int health)
+	{
+		super();
+		mId = id;
+		mName = name;
+		mDamage = damage;
+		mDefense = defense;
+		mHealth = health;
+		mEquipment = "";
+	}
 
 	public int getId() {
 		return mId;

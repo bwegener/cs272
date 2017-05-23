@@ -1,37 +1,43 @@
 package edu.orangecoastcollege.cs272.view;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import edu.orangecoastcollege.cs272.controller.Controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.fxml.Initializable;
 
-public class CombatForest {
+public class CombatForest implements Initializable {
+	Controller controller = Controller.getInstance();
 	
+	@FXML
+	private Button sneakButton;
 	@FXML
 	private Button fightButton;
-
 	@FXML
 	private Button runButton;
-	
 	@FXML
 	private Button goButton;
-	
 	@FXML
 	private Button okButton;
-	
 	@FXML
 	private Button talkButton;
-	
 	@FXML
 	private Label preBattleText;
-	
 	@FXML
 	private Label runText;
-	
 	@FXML
 	private Label fightText;
-	
 	@FXML
 	private Label talkText;
+    @Override
+	public void initialize(URL location, ResourceBundle resources) {
+    	if(controller.getCurrentPlayer().getDexterity() >= 8){
+    		sneakButton.setVisible(true);
+    	}
+    }
 	
 	@FXML
 	public Object optionsScene()

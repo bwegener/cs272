@@ -1,36 +1,40 @@
 package edu.orangecoastcollege.cs272.view;
 
+import edu.orangecoastcollege.cs272.controller.Controller;
+import edu.orangecoastcollege.cs272.model.Player;
 import javafx.fxml.FXML;
 
 public class Load {
-
+	Controller controller = Controller.getInstance();
+	public Player currentPlayer;
 	@FXML
 	public Object save1()
 	{
-		ViewNavigator.loadScene("Character Creator", ViewNavigator.CHARACTER_CREATOR);
+		controller.loadUser(1);
+		ViewNavigator.loadScene("Character Creator", ViewNavigator.FOREST_SCENE_2);
 		return this;
 	}
 	
 	@FXML
 	public Object save2()
 	{
-		ViewNavigator.loadScene("Character Creator", ViewNavigator.CHARACTER_CREATOR);
+		controller.loadUser(2);
+		ViewNavigator.loadScene("Character Creator", ViewNavigator.FOREST_SCENE_2);
 		return this;
 	}
 	
 	@FXML
 	public Object save3()
 	{
-		ViewNavigator.loadScene("Character Creator", ViewNavigator.CHARACTER_CREATOR);
+		controller.loadUser(3);
+		ViewNavigator.loadScene("Character Creator", ViewNavigator.FOREST_SCENE_2);
 		return this;
 	}
 	
 	@FXML
 	public Object optionsScene()
 	{
-		ViewNavigator.prevScene = ViewNavigator.LOAD;
-		ViewNavigator.prevTitle = "Load Save";
-		ViewNavigator.loadScene("Options", ViewNavigator.OPTIONS_SCENE);
+		ViewNavigator.loadScene("Player Stats", ViewNavigator.prevScene);
 		return this;
 	}
 	

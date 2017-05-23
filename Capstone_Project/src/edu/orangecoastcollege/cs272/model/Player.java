@@ -12,6 +12,7 @@ package edu.orangecoastcollege.cs272.model;
 		private int mDexStat;
 		private int mFullHealth;
 		private int mCurrentHealth;
+		private String mFace;
 
 		/**
 		 * Retrieve the ID of the mob or player object
@@ -56,6 +57,13 @@ package edu.orangecoastcollege.cs272.model;
 			return mFullHealth;
 		}
 		/**
+		 * Get the face image of the player
+		 * @return
+		 */
+		public String getFace(){
+			return mFace;
+		}
+		/**
 		 * Set the int stat of the mob or player object
 		 * @param intStat
 		 */
@@ -78,6 +86,9 @@ package edu.orangecoastcollege.cs272.model;
 			mDexStat = dexStat;
 			this.calculateHealth();
 		}
+		public void setFace(String newFace){
+			mFace = newFace;
+		}
 
 		public Player()
 		{
@@ -86,6 +97,7 @@ package edu.orangecoastcollege.cs272.model;
 		    mDexStat = 5;
 		    mIntStat = 5;
 		    mFullHealth = 25;
+			mFace = "Images/face1.jpeg";
 		}
 		/**
 		 * Used for the for the player.
@@ -103,6 +115,25 @@ package edu.orangecoastcollege.cs272.model;
 			mDexStat = dexStat;
 			mFullHealth = this.calculateHealth();
 			mCurrentHealth = mFullHealth;
+			mFace = "Images/face1.jpeg";
+		}
+		/**
+		 * Used for the for the player.
+		 * @param name of the mob or player
+		 * @param level of the mob or player
+		 * @param intStat stats used for damage calculations on spells
+		 * @param strStat stats used for damage calculations on average or heavy physical weapons
+		 * @param dexStat stats used for damage calculations on ranged or light weight weapons
+		 */
+		public Player(int id, String name, int intStat, int strStat, int dexStat, String face){
+			mId = id;
+			mName = name;
+			mIntStat = intStat;
+			mStrStat = strStat;
+			mDexStat = dexStat;
+			mFullHealth = this.calculateHealth();
+			mCurrentHealth = mFullHealth;
+			mFace = face;
 		}
 		/**
 		 * Fully Heal mob with one command
@@ -115,7 +146,7 @@ package edu.orangecoastcollege.cs272.model;
 		 * @return
 		 */
 		public void intUp(){
-			mStrStat += 1;
+			mIntStat += 1;
 			this.calculateHealth();
 		}
 		/**
@@ -139,7 +170,7 @@ package edu.orangecoastcollege.cs272.model;
 		 * @return
 		 */
 		public void intDown(){
-			mStrStat -= 1;
+			mIntStat -= 1;
 			this.calculateHealth();
 		}
 		/**

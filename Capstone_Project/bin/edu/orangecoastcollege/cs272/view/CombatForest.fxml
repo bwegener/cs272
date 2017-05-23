@@ -112,5 +112,10 @@
          </font>
       </Button>
       <Button layoutX="527.0" layoutY="14.0" mnemonicParsing="false" onAction="#statsScene" opacity="0.75" text="stats" />
+      <Button fx:id="sneakButton" layoutX="494.0" layoutY="332.0" mnemonicParsing="false" onAction="#go" text="Sneak" visible="false">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
    </children>
 </Pane>

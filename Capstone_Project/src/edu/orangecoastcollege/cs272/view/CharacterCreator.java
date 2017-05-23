@@ -1,49 +1,42 @@
 package edu.orangecoastcollege.cs272.view;
 
+import java.io.File;
+
 import edu.orangecoastcollege.cs272.controller.Controller;
 import edu.orangecoastcollege.cs272.model.Player;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class CharacterCreator {
 
-
-    private static Controller controller = Controller.getInstance();
+    Controller controller = Controller.getInstance();
+	// Call CharacterCreater.currentPlayer used to add to database when saving
+    public static Player currentPlayer = new Player();
+    
     private int pool = 10;
-    private Player currentPlayer = new Player();
+    private int characterPosition = 0;
+    private String[] characterArray = new String[]{"face1.jpeg","face2.png","face3.png"};
     
     @FXML
     private Label pointsLabel;
 	@FXML
 	private TextField nameTF;
 	@FXML
-	private Button startButton;
-	@FXML
 	private Label nameErrorLabel;
 	@FXML
 	private Label insufficentStatLabel;
 	@FXML
-	private Button plusStrength;
-	@FXML
-	private Button minusStrength;
-	@FXML
-	private Button plusDexterity;
-	@FXML
-	private Button minusDexterity;
-	@FXML
-	private Button plusIntellect;
-	@FXML
-	private Button minusIntellect;
-	@FXML
-	private Button plusImage;
-	@FXML
-	private Button minusImage;
-	@FXML
 	private Slider strSlider;
-
+	@FXML
+	private Slider dexSlider;
+	@FXML
+	private Slider intSlider;
+	@FXML
+	private ImageView characterFace;
 
 	@FXML
 	public Object optionsScene()
@@ -57,10 +50,11 @@ public class CharacterCreator {
 	/*
 	 * IDEA: set start button to be invisible till name is entered.
 	 */
-
+	
 	@FXML
 	public Object start()
 	{
+		controller.setCurrentPlayer(currentPlayer);
 		String name = nameTF.getText();
 		//controller.getCurr
 		if(name.isEmpty())
@@ -73,7 +67,6 @@ public class CharacterCreator {
 			ViewNavigator.loadScene("Forest", ViewNavigator.INTRO_FOREST);
 			return this;
 		}
-
 		return null;
 	}
 
@@ -99,7 +92,7 @@ public class CharacterCreator {
 	@FXML
 	public Object minusStrength()
 	{
-		if (pool < 10 && pool >= 0)
+		if (pool >= 0 && currentPlayer.getStrength() > 0)
 		{
 			currentPlayer.strDown();
 			strSlider.setValue(currentPlayer.getStrength());;
@@ -107,7 +100,7 @@ public class CharacterCreator {
 			pointsLabel.setText(String.valueOf(pool));
 			return this;
 		}
-		else if (pool == 10 && currentPlayer.getStrength() == 5)
+		else if (currentPlayer.getStrength() == 0)
 		{
 			insufficentStatLabel.setText("Not Enough Strength");
 		}
@@ -118,20 +111,19 @@ public class CharacterCreator {
 	@FXML
 	public Object plusDexterity()
 	{
-
-		if (pool < 10 && pool >= 0)
+		if (pool > 0 && currentPlayer.getDexterity() < 10)
 		{
-			currentPlayer.dexDown();
-			strSlider.setValue(currentPlayer.getDexterity());;
-			pool++;
+			currentPlayer.dexUp();
+			dexSlider.setValue(currentPlayer.getDexterity());;
+			pool--;
 			pointsLabel.setText(String.valueOf(pool));
 			return this;
 		}
-		else if (pool == 10 && currentPlayer.getDexterity() == 5)
+		else
 		{
-			insufficentStatLabel.setText("Not Enough Strength");
+			insufficentStatLabel.setText("To Much Dexterity");
 		}
-		
+			
 		return null;
 	}
 
@@ -139,36 +131,94 @@ public class CharacterCreator {
 	public Object minusDexterity()
 	{
 
-		return this;
+		if (pool >= 0 && currentPlayer.getDexterity() > 0)
+		{
+			currentPlayer.dexDown();
+			dexSlider.setValue(currentPlayer.getDexterity());;
+			pool++;
+			pointsLabel.setText(String.valueOf(pool));
+			return this;
+		}
+		else if (currentPlayer.getDexterity() == 0)
+		{
+			insufficentStatLabel.setText("Not Enough Dexterity");
+		}
+		
+		return null;
 	}
 
 	@FXML
 	public Object plusIntellect()
 	{
-
-		return this;
+		if (pool > 0 && currentPlayer.getIntellect() < 10)
+		{
+			currentPlayer.intUp();
+			intSlider.setValue(currentPlayer.getIntellect());;
+			pool--;
+			pointsLabel.setText(String.valueOf(pool));
+			return this;
+		}
+		else
+		{
+			insufficentStatLabel.setText("To Much Intellect");
+		}
+			
+		return null;
 	}
 
 	@FXML
 	public Object minusIntellect()
 	{
 
-		return this;
+		if (pool >= 0 && currentPlayer.getIntellect() > 0)
+		{
+			currentPlayer.intDown();
+			intSlider.setValue(currentPlayer.getIntellect());;
+			pool++;
+			pointsLabel.setText(String.valueOf(pool));
+			return this;
+		}
+		else if (currentPlayer.getIntellect() == 0)
+		{
+			insufficentStatLabel.setText("Not Enough Intellect");
+		}
+		
+		return null;
 	}
-
+	
+	 // Created by Duong Tran
 	@FXML
 	public Object plusImage()
 	{
+		characterPosition +=1;
+		if(characterPosition < characterArray.length)
 
+			changeImage(characterArray[characterPosition]);
+		else{
+			characterPosition = 0;
+			changeImage(characterArray[0]);
+		}
 		return this;
 	}
-
+	 // Created by Duong Tran
 	@FXML
 	public Object minusImage()
 	{
-
+		characterPosition -=1;
+		if(characterPosition >= 0)
+			changeImage(characterArray[characterPosition]);
+		else{
+			characterPosition = characterArray.length - 1;
+			changeImage(characterArray[characterArray.length-1]);
+		}
 		return this;
 	}
-
+	// Created by Duong Tran
+    private ImageView changeImage(String face){
+    	Image character = new Image((new File("Images/" + face).toURI().toString()));
+    	characterFace.setImage(character);
+    	currentPlayer.setFace("Images/" + face);
+        return characterFace;
+    }
 
 }

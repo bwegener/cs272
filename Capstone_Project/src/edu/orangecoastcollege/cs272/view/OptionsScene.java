@@ -20,6 +20,14 @@ public class OptionsScene {
 		ViewNavigator.loadScene("Title", ViewNavigator.TITLE);
 		return this;
 	}
+	// Added by Duong Tran
+	@FXML
+	public Object Load()
+	{
+		
+		ViewNavigator.loadScene("Load", ViewNavigator.LOAD);
+		return this;
+	}
 	
 	@FXML
 	public Object quit()
