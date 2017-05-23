@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.orangecoastcollege.cs272.view.ConvoWoman">
+   <children>
+      <ImageView fitHeight="408.0" fitWidth="600.0" layoutY="-1.0" opacity="0.8" pickOnBounds="true">
+         <image>
+            <Image url="@../../../../../Images/Village.jpeg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="338.0" fitWidth="243.0" layoutX="394.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../Images/farmerEdit.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="200.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="125.0" fitWidth="98.0" layoutX="345.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../Images/chicken.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#optionsScene" opacity="0.8" text="*" />
+      <Button layoutX="527.0" layoutY="14.0" mnemonicParsing="false" onAction="#statsScene" opacity="0.8" text="stats" />
+      <ImageView fitHeight="125.0" fitWidth="98.0" layoutX="176.0" layoutY="195.0" opacity="0.41" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../Images/chicken.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="125.0" fitWidth="98.0" layoutX="70.0" layoutY="211.0" opacity="0.4" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../Images/chicken.png" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#949494" height="268.0" layoutX="-1.0" layoutY="63.0" opacity="0.38" stroke="BLACK" strokeType="INSIDE" width="411.0" />
+      <Rectangle fx:id="rectangle" arcHeight="5.0" arcWidth="5.0" fill="#ffad1f" height="150.0" layoutX="327.0" layoutY="14.0" opacity="0.2" stroke="BLACK" strokeType="INSIDE" visible="false" width="147.0" />
+      <ImageView fx:id="jorts" fitHeight="138.0" fitWidth="147.0" layoutX="327.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../../../../Images/JortsEdit.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="line1" layoutX="2.0" layoutY="39.0" prefHeight="312.0" prefWidth="411.0" text="You approach the woman.&#10;Upon hearing your foot steps&#10;she turns and notices you,&#10;there is a look in her eyes that&#10;makes you feel unwelcome.&#10;She looks at you more strangely:&#10;&quot;Sir, what happened to&#10;your clothes?&quot;" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="AdobeGothicStd-Bold" size="25.0" />
+         </font>
+      </Label>
+      <Button fx:id="examine" layoutX="240.0" layoutY="336.0" mnemonicParsing="false" onAction="#line2" opacity="0.85" text="Examine">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Button>
+      <Label fx:id="line2" layoutX="26.0" layoutY="28.0" prefHeight="312.0" prefWidth="411.0" text="You look down and notice&#10;that you are wearing jorts.&#10;Strange that you are wearing&#10;jorts in a fantasy world, no?" textAlignment="CENTER" textFill="WHITE" visible="false">
+         <font>
+            <Font name="AdobeGothicStd-Bold" size="25.0" />
+         </font>
+      </Label>
+      <Label fx:id="line3No" layoutX="2.0" layoutY="39.0" prefHeight="312.0" prefWidth="411.0" text="&quot;Ok, well we disagree.&#10;Anyways... there is a knight,&#10;Sir Maulding of Pikehold, &#10;son of Gilbertus &#10;of Stephensburg.&#10;He needs your help.&quot;" textAlignment="CENTER" textFill="WHITE" visible="false">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Label fx:id="line3Yes" layoutX="2.0" layoutY="47.0" prefHeight="312.0" prefWidth="411.0" text="&quot;Good... Go change.&#10;Anyways... there is a knight,&#10;Sir Maulding of Pikehold, &#10;son of Gilbertus &#10;of Stephensburg.&#10;He needs your help.&quot;" textAlignment="CENTER" textFill="WHITE" visible="false">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Label fx:id="line4" layoutX="20.0" layoutY="44.0" prefHeight="312.0" prefWidth="411.0" text="&quot;Great, he's up that&#10;mountain yonder.&#10;Get to it!&quot;&#10;&#10;For brevity you &#10;decide it's better &#10;to just do what she says." textAlignment="CENTER" textFill="WHITE" visible="false">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Button fx:id="no" layoutX="206.0" layoutY="340.0" mnemonicParsing="false" onAction="#line3No" opacity="0.85" text="No" visible="false">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Button>
+      <Button fx:id="yes" layoutX="327.0" layoutY="340.0" mnemonicParsing="false" onAction="#line3Yes" opacity="0.85" text="Yes" visible="false">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Button>
+      <Button fx:id="ok" layoutX="271.0" layoutY="336.0" mnemonicParsing="false" onAction="#ok" opacity="0.8" text="OK" visible="false">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Button>
+      <Button fx:id="go" layoutX="272.0" layoutY="336.0" mnemonicParsing="false" onAction="#go" opacity="0.8" text="Go" visible="false">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Button>
+   </children>
+</Pane>

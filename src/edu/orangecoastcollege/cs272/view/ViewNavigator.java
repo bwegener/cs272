@@ -6,26 +6,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * Created by Brian Wegener
+ * with some ammendments by Duong Tran and Khang Nguyen
+ * 
+ * This JavaFX class is where all of the different
+ * scenes are called
+ * 
+ * @author Brian Wegener, Duong Tran, Khang Nguyen
+ * @version 1.0
+ */
 public class ViewNavigator {
-	
-	
-	// TO ADD MUSIC TO SCENES
-	//  static final String COMBAT_FOREST_PATH = "mp3/MUSIC.mp3";
-	//  static final String INTRO_FOREST_PATH = "mp3/MUSIC2.mp3"
-
-	/*
-      Media song = new Media(new File(MainView.COMBAT_FOREST_PATH).toURI().toString());
-      MediaPlayer player = new MediaPlayer(song);
-      player.setVolume(50);
-      player.setAutoPlay(true);
-      player.setOnEndOfMedia(new Runnable)
-      {
-          public void run() {
-              player.seek(Duration.ZERO);
-          }
-      }
-	*/
-	
+		
 	// This is where I put the different scenes
 	public static final String TITLE = "Title.fxml";
 	public static final String DATABASES = "Databases.fxml";
@@ -42,17 +34,26 @@ public class ViewNavigator {
 	public static final String CONVO_WOMAN = "ConvoWoman.fxml";
 	public static final String CONVO_MAN = "ConvoMan.fxml";
 	public static final String BASE_OF_MOUNTAIN = "BaseOfMountain.fxml";
+	public static final String BASE_CAMP = "BaseCamp.fxml";
 	
 	public static Stage mainStage;
 	public static String prevScene;
 	public static String prevTitle;
 	
+	/**
+	 * This sets the stage so that the application can call the different scenes
+	 * @param stage
+	 */
 	public static void setStage(Stage stage)
 	{
 		mainStage = stage;
 	}
 	
-	
+	/**
+	 * This loads a scene using the string and fxml files
+	 * @param title
+	 * @param sceneFXML
+	 */
 	public static void loadScene(String title, String sceneFXML)
 	{
 		try {

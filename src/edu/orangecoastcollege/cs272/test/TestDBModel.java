@@ -15,6 +15,16 @@ import org.junit.Test;
 
 import edu.orangecoastcollege.cs272.model.DBModel;
 
+/**
+ * This class was created by Brian Wegener
+ * ammended and updated by Khang Nguyen
+ * and updated/fixed by Duong Tran
+ * 
+ * This class checks to make sure the database works
+ * 
+ * @author Brian Wegener, Duong Tran, Khang Nguyen
+ * @version 1.0
+ */
 public class TestDBModel {
 
 	private static final String DB_NAME = "cs272_test.db";
@@ -27,21 +37,38 @@ public class TestDBModel {
 	private String[] values;
 
 
+	/**
+	 * This sets up a new database before any test is executed
+	 * @throws Exception
+	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		db = new DBModel(DB_NAME, TABLE_NAME, FIELD_NAMES, FIELD_TYPES);
 	}
 
+	/**
+	 * THis sets up the database before it is executed
+	 * with default values
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		values = new String[] {"1", "Brian", "8", "7", "10", "25", "sword"};
 	}
 
+	/**
+	 * This tears down the database
+	 * by deleting all records
+	 * @throws Exception
+	 */
 	@After
 	public void tearDown() throws Exception {
 		db.deleteAllRecords();
 	}
 
+	/**
+	 * This gets all records from the database
+	 */
     @Test
     public void testGetAllRecords()
     {
@@ -55,6 +82,9 @@ public class TestDBModel {
         }
     }
 
+    /**
+     * This tests to see if it can get a record from the database
+     */
     @Test
     public void testGetRecord()
     {
@@ -70,6 +100,9 @@ public class TestDBModel {
         }
     }
 
+    /**
+     * This gets the record count from the database
+     */
     @Test
     public void testGetRecordCount()
     {
@@ -90,6 +123,9 @@ public class TestDBModel {
         }
     }
 
+    /**
+     * This tests to see if the database can create a record
+     */
     @Test
     public void testCreateRecord()
     {
@@ -114,6 +150,9 @@ public class TestDBModel {
         }
     }
 
+    /**
+     * This tests to see if the database can update a record
+     */
     @Test
     public void testUpdateRecord()
     {
@@ -131,6 +170,9 @@ public class TestDBModel {
 
     }
 
+    /**
+     * This tests to see if the database can delete all records
+     */
     @Test
     public void testDeleteAllRecords()
     {
@@ -147,6 +189,9 @@ public class TestDBModel {
         }
     }
 
+    /**
+     * This tests to see if the database can delete one record
+     */
     @Test
     public void testDeleteRecord()
     {

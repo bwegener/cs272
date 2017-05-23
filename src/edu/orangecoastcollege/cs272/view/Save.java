@@ -11,6 +11,10 @@ import javafx.fxml.FXML;
 public class Save {
 	Controller controller = Controller.getInstance();
 
+	/**
+	 * This creates a save file for the character
+	 * @return
+	 */
 	@FXML
 	public Object save1()
 	{
@@ -18,6 +22,10 @@ public class Save {
 		return this;
 	}
 	
+	/**
+	 * This creates a save file for the character
+	 * @return
+	 */
 	@FXML
 	public Object save2()
 	{
@@ -25,6 +33,10 @@ public class Save {
 		return this;
 	}
 	
+	/**
+	 * This creates a save file for the character
+	 * @return
+	 */
 	@FXML
 	public Object save3()
 	{
@@ -32,6 +44,10 @@ public class Save {
 		return this;
 	}
 	
+	/**
+	 * This sends the player to the previous scene
+	 * @return
+	 */
 	@FXML
 	public Object optionsScene()
 	{

@@ -1,3 +1,4 @@
+
 package edu.orangecoastcollege.cs272.model;
 
 import java.sql.Connection;
@@ -7,6 +8,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+/**
+ * This database which was created by Brian
+ * but ammended by Khang and Duong
+ * and fixed and updated by Duong
+ * @author Brian Wegener, Duong Tran, Khang Nguyen
+ * @version 1.0
+ */
 public class DBModel {
 	
     private String mDBName;
@@ -14,6 +22,14 @@ public class DBModel {
     private String[] mFieldNames;
     private String[] mFieldTypes;
     
+    /**
+     * This is the dbModel with a dbName, tableName, fieldNames, and fieldTypes
+     * @param dbName
+     * @param tableName
+     * @param fieldNames
+     * @param fieldTypes
+     * @throws SQLException
+     */
     public DBModel(String dbName, String tableName, String[] fieldNames, String[] fieldTypes) throws SQLException
     {
         super();
@@ -40,6 +56,11 @@ public class DBModel {
         }
     }
     
+    /**
+     * This gets all the records and closes the connection to the database when it's finished
+     * @return
+     * @throws SQLException
+     */
     public ArrayList<ArrayList<String>> getAllRecords() throws SQLException
     {
         try (Connection connection = connectToDB();
@@ -63,6 +84,12 @@ public class DBModel {
         }
     }
     
+    /**
+     * This gets a single record from the database
+     * @param key
+     * @return
+     * @throws SQLException
+     */
     public ArrayList<ArrayList<String>> getRecord(String key) throws SQLException
     {
         try (Connection connection = connectToDB();
@@ -86,11 +113,23 @@ public class DBModel {
         }
     }
     
+    /**
+     * This gets the record count
+     * @return
+     * @throws SQLException
+     */
     public int getRecordCount() throws SQLException
     {
         return getAllRecords().size();
     }
     
+    /**
+     * This creates a record in the database
+     * @param fields
+     * @param values
+     * @return
+     * @throws SQLException
+     */
     public int createRecord(String[] fields, String[] values) throws SQLException
     {
         try (Connection connection = connectToDB(); Statement stmt = connection.createStatement();)
@@ -109,11 +148,20 @@ public class DBModel {
         }
     }
     
+    /**
+     * This updates the record in the database
+     * @param key
+     * @param fields
+     * @param values
+     * @return
+     * @throws SQLException
+     */
     public boolean updateRecord(String key, String[] fields, String[] values) throws SQLException
     {
         try (Connection connection = connectToDB(); Statement stmt = connection.createStatement();)
         {
             if (fields == null || values == null || fields.length == 0 || fields.length != values.length) return false;
+            
             StringBuilder updateSQL = new StringBuilder("UPDATE ");
             updateSQL.append(mTableName).append(" SET ");
             for (int i = 0; i < fields.length; i++)
@@ -126,6 +174,10 @@ public class DBModel {
         }
     }
     
+    /**
+     * This deletes all records in the database
+     * @throws SQLException
+     */
     public void deleteAllRecords() throws SQLException
     {
         try (Connection connection = connectToDB(); Statement stmt = connection.createStatement();)
@@ -134,6 +186,11 @@ public class DBModel {
         }
     }
     
+    /**
+     * This deletes a single record in the database
+     * @param key
+     * @throws SQLException
+     */
     public void deleteRecord(String key) throws SQLException
     {
         try (Connection connection = connectToDB(); Statement stmt = connection.createStatement();)
@@ -172,14 +229,4 @@ public class DBModel {
         Connection connection = DriverManager.getConnection("jdbc:sqlite:" + mDBName);
         return connection;
     }
-    
-    
-    /*
-     * How Do I Make Close Connection Method????
-
-    public void close(Connection connection) throws SQLException
-    {
-    	connection.close();
-    }
-    */
 }

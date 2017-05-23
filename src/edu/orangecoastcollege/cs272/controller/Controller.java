@@ -16,7 +16,16 @@ import edu.orangecoastcollege.cs272.model.Quest;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-
+/**
+ * Created by Brian Wegener and Khang Nguyen
+ * Ammended, Updated, and Fixed by Duong Tran
+ * 
+ * This controller connects the database and classes
+ * to the view and pulls information from the databases/classes
+ * and allows it to be used in the view package
+ * @author Brian Wegener, Duong Tran, Khang Nguyen
+ * @version 1.0
+ */
 public class Controller {
 
 	private static Controller theOne;
@@ -24,8 +33,8 @@ public class Controller {
 	private static final String DB_NAME = "text_rpg.db";
 
 	private static final String PLAYER_TABLE_NAME = "player";
-	private static final String[] PLAYER_FIELD_NAMES = { "id", "name", "strength", "dexterity", "intellect", "health", "face" };
-	private static final String[] PLAYER_FIELD_TYPES = {"INTEGER PRIMARY KEY", "TEXT", "INTEGER", "INTEGER", "INTEGER", "INTEGER", "TEXT" };
+	private static final String[] PLAYER_FIELD_NAMES = { "id", "name", "strength", "dexterity", "intellect", "face" };
+	private static final String[] PLAYER_FIELD_TYPES = {"INTEGER PRIMARY KEY", "TEXT", "INTEGER", "INTEGER", "INTEGER", "TEXT" };
 
 	private static final String ENEMY_TABLE_NAME = "enemy";
 	private static final String[] ENEMY_FIELD_NAMES = { "id", "name", "damage", "defense", "health"};
@@ -57,9 +66,9 @@ public class Controller {
 	private static final String[] PLAYER_ATTACKS_NAMES = {"user_id", "ability_id"};
 	private static final String[] PLAYER_ATTACKS_TYPES = {"INTEGER", "INTEGER"};
 
-	// SAVE FILE???
+
 	private Player mCurrentPlayer;
-	//	private Enemy mEnemy;
+	private Equipment mCurrentEquipment;
 	private DBModel mPlayerDB;
 	private DBModel mEnemyDB;
 	private DBModel mEquipmentDB;
@@ -80,10 +89,15 @@ public class Controller {
 	{
 	}
 
-	/*
-	 * Need to finish by adding the remaining tables
-	 */
 
+	/**
+	 * Original by Brian
+	 * Updated and Ammended by Duong and Khang
+	 * This instance creates the observable array lists.
+	 * It also instantiates the player database
+	 * It pulls from the csv files to create the enemy, equipment, quest, and attack databases.
+	 * @return theOne controller
+	 */
 	public static Controller getInstance()
 	{
 		if(theOne == null)
@@ -98,8 +112,8 @@ public class Controller {
 			
 			try {
 				theOne.mPlayerDB = new DBModel(DB_NAME, PLAYER_TABLE_NAME, PLAYER_FIELD_NAMES, PLAYER_FIELD_TYPES);
-
 				ArrayList<ArrayList<String>> resultsList = theOne.mPlayerDB.getAllRecords();
+				theOne.initializePlayerDBFromFile();
 				for(ArrayList<String> values : resultsList)
 				{
 					int id = Integer.parseInt(values.get(0));
@@ -181,25 +195,6 @@ public class Controller {
 		return theOne;
 	}
 
-	private int initializePlayerDBFromFile() throws SQLException {
-		int recordsCreated = 0;
-		if(theOne.mPlayerDB.getRecordCount() > 0) return 0;
-		 
-		for(int i = 0; i < 3; i++)
-		{
-		String[] values = new String[PLAYER_FIELD_NAMES.length-1];
-		Player dummyPlayer = new Player();
-		values[0] = dummyPlayer.getName();
-		values[1] = String.valueOf(dummyPlayer.getStrength());
-		values[2] = String.valueOf(dummyPlayer.getDexterity());
-		values[3] = String.valueOf(dummyPlayer.getIntellect());
-		values[4] = dummyPlayer.getFace();
-		theOne.mPlayerDB.createRecord(Arrays.copyOfRange(PLAYER_FIELD_NAMES, 1, PLAYER_FIELD_NAMES.length), values);
-		recordsCreated++;
-		}
-			return recordsCreated;
-	}
-	
 	private int  initializeEnemyDBFromFile() throws SQLException {
 		int recordsCreated = 0;
 
@@ -213,6 +208,7 @@ public class Controller {
 				String[] data = fileScanner.nextLine().split(",");
 				String[] values = new String[ENEMY_FIELD_NAMES.length-1];
 
+				// IS THIS JUST FOR STRINGS?
 				values[0] = data[0].replaceAll("'", "''");
 				values[1] = data[1];
 				values[2] = data[2];
@@ -242,6 +238,7 @@ public class Controller {
 				String[] data = fileScanner.nextLine().split(",");
 				String[] values = new String[EQUIPMENT_FIELD_NAMES.length-1];
 
+				// IS THIS JUST FOR STRINGS?
 				values[0] = data[0].replaceAll("'", "''");
 				values[1] = data[1];
 				values[2] = data[2];
@@ -272,7 +269,8 @@ public class Controller {
 				String[] data = fileScanner.nextLine().split(",");
 				String[] values = new String[QUEST_FIELD_NAMES.length-1];
 
-				values[0] = data[0].replaceAll("'", "''");
+				// IS THIS JUST FOR STRINGS?
+				values[0] = data[0].replaceAll("'", "''"); // NEED FOR STRINGS
 				values[1] = data[1];
 				values[2] = data[2];
 				theOne.mQuestDB.createRecord(Arrays.copyOfRange(QUEST_FIELD_NAMES, 1, QUEST_FIELD_NAMES.length), values);
@@ -299,7 +297,8 @@ public class Controller {
 				String[] data = fileScanner.nextLine().split(",");
 				String[] values = new String[ATTACK_FIELD_NAMES.length-1];
 
-				values[0] = data[0].replaceAll("'", "''");
+				// IS THIS JUST FOR STRINGS?
+				values[0] = data[0].replaceAll("'", "''"); // NEED FOR STRINGS
 				values[1] = data[1];
 				values[2] = data[2];
 				values[3] = data[3];
@@ -315,43 +314,120 @@ public class Controller {
 		}
 		return recordsCreated;
 	}
+	private int initializePlayerDBFromFile() throws SQLException {
+		int recordsCreated = 0;
+		if(theOne.mPlayerDB.getRecordCount() > 0) return 0;
 
+		for(int i = 0; i < 3; i++)
+		{
+			String[] values = new String[PLAYER_FIELD_NAMES.length-1];
+			Player dummyPlayer = new Player();
+			// IS THIS JUST FOR STRINGS?
+			values[0] = dummyPlayer.getName();
+			values[1] = String.valueOf(dummyPlayer.getStrength());
+			values[2] = String.valueOf(dummyPlayer.getDexterity());
+			values[3] = String.valueOf(dummyPlayer.getIntellect());
+			values[4] = dummyPlayer.getFace();
+			theOne.mPlayerDB.createRecord(Arrays.copyOfRange(PLAYER_FIELD_NAMES, 1, PLAYER_FIELD_NAMES.length), values);
+			recordsCreated++;
+		}
+		return recordsCreated;
+	}
 	
+	
+	/**
+	 * This gets the current player from the program
+	 * @return the current player
+	 */
 	public Player getCurrentPlayer()
 	{
 		return mCurrentPlayer;
 	}
 
+	/**
+	 * Sets the current player
+	 * @param currentPlayer
+	 */
 	public void setCurrentPlayer(Player currentPlayer)
 	{
 	    mCurrentPlayer = currentPlayer;
 	}
+	
+	/**
+	 * Gets the equipment from the csv
+	 * @return the equipment
+	 */
+	public Equipment getCurrentEquipment()
+	{
+		return mCurrentEquipment;
+	}
 
+	/**
+	 * Sets the current equipment
+	 * @param currentEquipment
+	 */
+	public void setCurrentEquipment(Equipment currentEquipment)
+	{
+	    mCurrentEquipment = currentEquipment;
+	}
+	
+	/**
+	 * Creates the observableList of all the players
+	 * @return the observableList of all players
+	 */
 	public ObservableList<Player> getAllPlayers()
 	{
 		return theOne.mAllPlayersList;
 	}
 
+	/**
+	 * Creates the observableList of all the enemies
+	 * @return the observableList of all enemies
+	 */
 	public ObservableList<Enemy> getAllEnemies()
 	{
 		return theOne.mAllEnemiesList;
 	}
 
+	/**
+	 * Creates the observableList of all the equipment
+	 * @return the observableList of all equipment
+	 */
 	public ObservableList<Equipment> getAllEquipment()
 	{
 		return theOne.mAllEquipmentList;
 	}
 
+	/**
+	 * Creates the observableList of all the quests
+	 * @return the observableList of all the quests
+	 */
 	public ObservableList<Quest> getAllQuests()
 	{
 		return theOne.mAllQuestsList;
 	}
 
+	/**
+	 * Creates the observableList of all the attacks
+	 * @return the observableList of all attacks
+	 */
 	public ObservableList<Attack> getAllAttacks()
 	{
 		return theOne.mAllAttacksList;
 	}
-	
+
+	/**
+	 * Duong Tran
+	 * Get an item from the DB
+	 */
+	public Equipment getItem(String itemName){
+		for(Equipment e :theOne.mAllEquipmentList){
+			if(e.getName().equalsIgnoreCase(itemName)){
+				return e;
+			}
+		}
+		return null;
+	}
 	/**
 	 * Duong Tran
 	 * Get the list of equipments the player is carrying
@@ -442,11 +518,12 @@ public class Controller {
 	 * Load the Game
 	 */
 	public String loadUser(int key){
-		for(Player p : theOne.mAllPlayersList)
-			if(p.getID() == key){
-				//ArrayList<ArrayList<String>> rs = theOne.mPlayerDB.getRecord(String.valueOf(p.getID()));
-				mCurrentPlayer = p;
-				return "SUCCESS";
+		for(Player p : theOne.mAllPlayersList){
+				if(p.getID() == key){
+					//ArrayList<ArrayList<String>> rs = theOne.mPlayerDB.getRecord(String.valueOf(p.getID()));
+					mCurrentPlayer = p;
+					return "SUCCESS";
+				}
 			}
 		return "Player not Found.";
 	}
@@ -455,30 +532,18 @@ public class Controller {
 	 * Save Player
 	 */
 	public void savePlayer(int key){
-		String[] values = new String[]{String.valueOf(mCurrentPlayer.getID()), mCurrentPlayer.getName(), 
+		String[] values = new String[]{ mCurrentPlayer.getName(), 
 											String.valueOf(mCurrentPlayer.getStrength()),
 											String.valueOf(mCurrentPlayer.getDexterity()),
 											String.valueOf(mCurrentPlayer.getIntellect()),
-											String.valueOf(mCurrentPlayer.getHealth()),
 											mCurrentPlayer.getFace()};
 		String[]fields = Arrays.copyOfRange(PLAYER_FIELD_NAMES, 1, PLAYER_FIELD_NAMES.length);
 		try {
 			theOne.mPlayerDB.updateRecord(String.valueOf(key), fields, values);
 			theOne.mAllPlayersList.set((key - 1), mCurrentPlayer);
-			//private static final String[] PLAYER_FIELD_NAMES = { "id", "name", "strength", "dexterity", "intellect", "health", "face" };
-			//private static final String[] PLAYER_FIELD_TYPES = {"INTEGER PRIMARY KEY", "TEXT", "INTEGER", "INTEGER", "INTEGER", "INTEGER", "TEXT" };
-			System.out.println(theOne.mPlayerDB.getRecord(String.valueOf(key)));
-			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
-	
-	//theOne.mPlayerDB.createRecord(Arrays.copyOfRange(PLAYER_FIELD_NAMES, 1, PLAYER_FIELD_NAMES.length), thisPlayer);
-	//theOne.mAllPlayersList.add(mCurrentPlayer);
-	
-	
-
 }

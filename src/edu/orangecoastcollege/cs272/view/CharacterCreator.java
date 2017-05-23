@@ -14,7 +14,18 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-
+/**
+ * Originally created by Brian Wegener
+ * with some ammendments Khang Nguyen
+ * Duong Tran created all of the buttons,
+ * connected them to the controller,
+ * set up the errors, and made this scene work.
+ * 
+ * This JavaFX scene is character creator
+ * 
+ * @author Brian Wegener, Duong Tran, Khang Nguyen
+ * @version 1.0
+ */
 public class CharacterCreator implements Initializable {
 	
     Controller controller = Controller.getInstance();
@@ -44,6 +55,10 @@ public class CharacterCreator implements Initializable {
 	@FXML
 	private ImageView characterFace;
 
+	/**
+	 * This takes the player to the options scene
+	 * @return
+	 */
 	@FXML
 	public Object optionsScene()
 	{
@@ -53,6 +68,13 @@ public class CharacterCreator implements Initializable {
 		return this;
 	}
 	
+	/**
+	 * This instantiates the character while doing some checks to
+	 * make sure the player entered all relevant information
+	 * it puts up erros if the player didn't
+	 * This also takes players to the introForest
+	 * @return
+	 */
 	@FXML
 	public Object start()
 	{
@@ -73,13 +95,16 @@ public class CharacterCreator implements Initializable {
 		{
 			currentPlayer.setName(name);
 			controller.setCurrentPlayer(currentPlayer);
-			ViewNavigator.loadScene("Forest", ViewNavigator.INTRO_FOREST);
+			ViewNavigator.loadScene("It Begins", ViewNavigator.INTRO_FOREST);
 			return this;
 		}
 		return null;
 	}
 	
-
+	/**
+	 * This button increases the strength
+	 * @return
+	 */
 	@FXML
 	public Object plusStrength()
 	{
@@ -106,6 +131,10 @@ public class CharacterCreator implements Initializable {
 		return null;
 	}
 
+	/**
+	 * This button decreases strength
+	 * @return
+	 */
 	@FXML
 	public Object minusStrength()
 	{
@@ -125,6 +154,10 @@ public class CharacterCreator implements Initializable {
 		return null;
 	}
 
+	/**
+	 * This button increases dexterity
+	 * @return
+	 */
 	@FXML
 	public Object plusDexterity()
 	{
@@ -151,6 +184,10 @@ public class CharacterCreator implements Initializable {
 		return null;
 	}
 
+	/**
+	 * This button decreases dexterity
+	 * @return
+	 */
 	@FXML
 	public Object minusDexterity()
 	{
@@ -170,6 +207,10 @@ public class CharacterCreator implements Initializable {
 		return null;
 	}
 
+	/**
+	 * This button increases intellect
+	 * @return
+	 */
 	@FXML
 	public Object plusIntellect()
 	{
@@ -195,6 +236,10 @@ public class CharacterCreator implements Initializable {
 		return null;
 	}
 
+	/**
+	 * This button decreases intellect
+	 * @return
+	 */
 	@FXML
 	public Object minusIntellect()
 	{
@@ -215,6 +260,10 @@ public class CharacterCreator implements Initializable {
 	}
 	
 	 // Created by Duong Tran
+	/**
+	 * This button changes the image
+	 * @return
+	 */
 	@FXML
 	public Object plusImage()
 	{
@@ -229,6 +278,10 @@ public class CharacterCreator implements Initializable {
 		return this;
 	}
 	 // Created by Duong Tran
+	/**
+	 * This button changes the iamge
+	 * @return
+	 */
 	@FXML
 	public Object minusImage()
 	{
@@ -242,6 +295,11 @@ public class CharacterCreator implements Initializable {
 		return this;
 	}
 	// Created by Duong Tran
+	/**
+	 * This calls the changeImage method which is used in the plus/minus Image methods
+	 * @param face
+	 * @return
+	 */
     private ImageView changeImage(String face){
     	Image character = new Image((new File("Images/" + face).toURI().toString()));
     	characterFace.setImage(character);
@@ -249,6 +307,9 @@ public class CharacterCreator implements Initializable {
         return characterFace;
     }
 
+    /**
+     * This initializes the scene so that it gets the current player
+     */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		currentPlayer = controller.getCurrentPlayer();
