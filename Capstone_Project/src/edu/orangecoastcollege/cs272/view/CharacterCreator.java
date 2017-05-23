@@ -1,21 +1,24 @@
 package edu.orangecoastcollege.cs272.view;
 
 import java.io.File;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import edu.orangecoastcollege.cs272.controller.Controller;
 import edu.orangecoastcollege.cs272.model.Player;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class CharacterCreator {
+public class CharacterCreator  implements Initializable {
 
     Controller controller = Controller.getInstance();
 	// Call CharacterCreater.currentPlayer used to add to database when saving
-    public static Player currentPlayer = new Player();
+    public static Player currentPlayer;
     
     private int pool = 10;
     private int characterPosition = 0;
@@ -28,7 +31,7 @@ public class CharacterCreator {
 	@FXML
 	private Label nameErrorLabel;
 	@FXML
-	private Label insufficentStatLabel;
+	private Label insufficientStatLabel;
 	@FXML
 	private Slider strSlider;
 	@FXML
@@ -54,9 +57,9 @@ public class CharacterCreator {
 	@FXML
 	public Object start()
 	{
-		controller.setCurrentPlayer(currentPlayer);
 		String name = nameTF.getText();
-		//controller.getCurr
+		currentPlayer.setName(name);
+		controller.setCurrentPlayer(currentPlayer);
 		if(name.isEmpty())
 		{
 			nameErrorLabel.setVisible(true);
@@ -83,7 +86,12 @@ public class CharacterCreator {
 		}
 		else
 		{
-			insufficentStatLabel.setText("To Much Str");
+			if(pool == 0){
+				insufficientStatLabel.setText("Not Enough Points");
+			}
+			else{
+				insufficientStatLabel.setText("To Much Str");
+			}
 		}
 			
 		return null;
@@ -102,7 +110,7 @@ public class CharacterCreator {
 		}
 		else if (currentPlayer.getStrength() == 0)
 		{
-			insufficentStatLabel.setText("Not Enough Strength");
+			insufficientStatLabel.setText("Not Enough Strength");
 		}
 		
 		return null;
@@ -121,7 +129,12 @@ public class CharacterCreator {
 		}
 		else
 		{
-			insufficentStatLabel.setText("To Much Dexterity");
+			if(pool == 0){
+				insufficientStatLabel.setText("Not Enough Points");
+			}
+			else{
+			insufficientStatLabel.setText("To Much Dexterity");
+			}
 		}
 			
 		return null;
@@ -141,7 +154,7 @@ public class CharacterCreator {
 		}
 		else if (currentPlayer.getDexterity() == 0)
 		{
-			insufficentStatLabel.setText("Not Enough Dexterity");
+			insufficientStatLabel.setText("Not Enough Dexterity");
 		}
 		
 		return null;
@@ -160,7 +173,12 @@ public class CharacterCreator {
 		}
 		else
 		{
-			insufficentStatLabel.setText("To Much Intellect");
+			if(pool == 0){
+				insufficientStatLabel.setText("Not Enough Points");
+			}
+			else{
+			insufficientStatLabel.setText("To Much Intellect");
+			}
 		}
 			
 		return null;
@@ -180,7 +198,7 @@ public class CharacterCreator {
 		}
 		else if (currentPlayer.getIntellect() == 0)
 		{
-			insufficentStatLabel.setText("Not Enough Intellect");
+			insufficientStatLabel.setText("Not Enough Intellect");
 		}
 		
 		return null;
@@ -220,5 +238,11 @@ public class CharacterCreator {
     	currentPlayer.setFace("Images/" + face);
         return characterFace;
     }
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		currentPlayer = controller.getCurrentPlayer();
+		
+	}
 
 }

@@ -1,11 +1,14 @@
 package edu.orangecoastcollege.cs272.view;
 
+import edu.orangecoastcollege.cs272.controller.Controller;
+import edu.orangecoastcollege.cs272.model.Equipment;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 public class IntroForest {
-	
+	Controller controller = Controller.getInstance();
+	private Equipment item = controller.getItem("Stick");
 	@FXML
 	private Label examineText;
 	
@@ -57,7 +60,15 @@ public class IntroForest {
 
 		// Collect Item -- Controller -- database
 	}
-	
+	@FXML
+	public Object pickUpStick(){
+		if (controller.addEquipmentToInventory(item))
+			System.out.println("SUCCESS");
+		else
+			System.out.println("Could not add game.");
+		go();
+		return this;
+	}
 	
 	@FXML
 	public Object go()

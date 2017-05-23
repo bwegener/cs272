@@ -14,21 +14,21 @@ public class Save {
 	@FXML
 	public Object save1()
 	{
-		controller.savePlayer("1");
+		controller.savePlayer(1);
 		return this;
 	}
 	
 	@FXML
 	public Object save2()
 	{
-		controller.savePlayer("2");
+		controller.savePlayer(2);
 		return this;
 	}
 	
 	@FXML
 	public Object save3()
 	{
-		controller.savePlayer("3");
+		controller.savePlayer(3);
 		return this;
 	}
 	

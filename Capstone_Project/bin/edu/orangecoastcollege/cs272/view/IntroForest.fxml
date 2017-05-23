@@ -57,7 +57,7 @@
             <Font size="30.0" />
          </font>
       </Label>
-      <Button fx:id="pickUpButton" layoutX="139.0" layoutY="319.0" mnemonicParsing="false" onAction="#go" opacity="0.75" prefHeight="40.0" prefWidth="107.0" text="Pick Up" visible="false">
+      <Button fx:id="pickUpButton" layoutX="139.0" layoutY="319.0" mnemonicParsing="false" onAction="#pickUpStick" opacity="0.75" prefHeight="40.0" prefWidth="107.0" text="Pick Up" visible="false">
          <font>
             <Font size="20.0" />
          </font>

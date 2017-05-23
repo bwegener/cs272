@@ -3,7 +3,6 @@ package edu.orangecoastcollege.cs272.view;
 import javafx.fxml.FXML;
 
 public class OptionsScene {
-
 	@FXML
 	public Object resume()
 	{
@@ -16,7 +15,6 @@ public class OptionsScene {
 	@FXML
 	public Object title()
 	{
-		
 		ViewNavigator.loadScene("Title", ViewNavigator.TITLE);
 		return this;
 	}

@@ -114,10 +114,11 @@ public class DBModel {
         try (Connection connection = connectToDB(); Statement stmt = connection.createStatement();)
         {
             if (fields == null || values == null || fields.length == 0 || fields.length != values.length) return false;
+            
             StringBuilder updateSQL = new StringBuilder("UPDATE ");
             updateSQL.append(mTableName).append(" SET ");
             for (int i = 0; i < fields.length; i++)
-                updateSQL.append(fields[i]).append("=").append(convertToSQLText(fields[i], values[i]))
+                updateSQL.append(fields[i]).append(" = ").append(convertToSQLText(fields[i], values[i]))
                         .append((i < fields.length - 1) ? ", " : " ");
 
             updateSQL.append("WHERE ").append(mFieldNames[0]).append("=").append(key);

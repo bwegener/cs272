@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import edu.orangecoastcollege.cs272.controller.Controller;
 import edu.orangecoastcollege.cs272.model.Equipment;
+import edu.orangecoastcollege.cs272.model.Player;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -31,15 +32,22 @@ public class ViewInventory implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		allUserEquipmentLV.setItems(controller.getAllEquipment());
-
+		allUserEquipmentLV.setItems(controller.getEquipmentForPlayers());
 	}
 	@FXML
 	public Object equip(){
+		Equipment testItem = allUserEquipmentLV.getSelectionModel().getSelectedItem();
+		if(testItem != null){
+			controller.setCurrentEquipment(testItem);
+			String equipName = testItem.getName();
+			weapon.setText(equipName);
+		}
 		return this;
 	}
 	@FXML
 	public Object unequip(){
+		controller.setCurrentEquipment(null);
+		weapon.setText("none");
 		return this;
 	}
 	@FXML

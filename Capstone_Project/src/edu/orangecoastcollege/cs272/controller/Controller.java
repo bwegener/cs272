@@ -23,8 +23,8 @@ public class Controller {
 	private static final String DB_NAME = "text_rpg.db";
 
 	private static final String PLAYER_TABLE_NAME = "player";
-	private static final String[] PLAYER_FIELD_NAMES = { "id", "name", "strength", "dexterity", "intellect", "health", "face" };
-	private static final String[] PLAYER_FIELD_TYPES = {"INTEGER PRIMARY KEY", "TEXT", "INTEGER", "INTEGER", "INTEGER", "INTEGER", "TEXT" };
+	private static final String[] PLAYER_FIELD_NAMES = { "id", "name", "strength", "dexterity", "intellect", "face" };
+	private static final String[] PLAYER_FIELD_TYPES = {"INTEGER PRIMARY KEY", "TEXT", "INTEGER", "INTEGER", "INTEGER", "TEXT" };
 
 	private static final String ENEMY_TABLE_NAME = "enemy";
 	private static final String[] ENEMY_FIELD_NAMES = { "id", "name", "damage", "defense", "health"};
@@ -58,7 +58,7 @@ public class Controller {
 
 	// SAVE FILE???
 	private Player mCurrentPlayer;
-	private Enemy mEnemy;
+	private Equipment mCurrentEquipment;
 	private DBModel mPlayerDB;
 	private DBModel mEnemyDB;
 	private DBModel mEquipmentDB;
@@ -97,8 +97,8 @@ public class Controller {
 			
 			try {
 				theOne.mPlayerDB = new DBModel(DB_NAME, PLAYER_TABLE_NAME, PLAYER_FIELD_NAMES, PLAYER_FIELD_TYPES);
-
 				ArrayList<ArrayList<String>> resultsList = theOne.mPlayerDB.getAllRecords();
+				theOne.initializePlayerDBFromFile();
 				for(ArrayList<String> values : resultsList)
 				{
 					int id = Integer.parseInt(values.get(0));
@@ -299,7 +299,25 @@ public class Controller {
 		}
 		return recordsCreated;
 	}
+	private int initializePlayerDBFromFile() throws SQLException {
+		int recordsCreated = 0;
+		if(theOne.mPlayerDB.getRecordCount() > 0) return 0;
 
+		for(int i = 0; i < 3; i++)
+		{
+			String[] values = new String[PLAYER_FIELD_NAMES.length-1];
+			Player dummyPlayer = new Player();
+			// IS THIS JUST FOR STRINGS?
+			values[0] = dummyPlayer.getName();
+			values[1] = String.valueOf(dummyPlayer.getStrength());
+			values[2] = String.valueOf(dummyPlayer.getDexterity());
+			values[3] = String.valueOf(dummyPlayer.getIntellect());
+			values[4] = dummyPlayer.getFace();
+			theOne.mPlayerDB.createRecord(Arrays.copyOfRange(PLAYER_FIELD_NAMES, 1, PLAYER_FIELD_NAMES.length), values);
+			recordsCreated++;
+		}
+		return recordsCreated;
+	}
 	
 	
 	
@@ -312,7 +330,15 @@ public class Controller {
 	{
 	    mCurrentPlayer = currentPlayer;
 	}
+	public Equipment getCurrentEquipment()
+	{
+		return mCurrentEquipment;
+	}
 
+	public void setCurrentEquipment(Equipment currentEquipment)
+	{
+	    mCurrentEquipment = currentEquipment;
+	}
 	public ObservableList<Player> getAllPlayers()
 	{
 		return theOne.mAllPlayersList;
@@ -356,7 +382,18 @@ public class Controller {
 
 	 * HOW TO MAKE POINTS
 	 */
-	
+	/**
+	 * Duong Tran
+	 * Get an item from the DB
+	 */
+	public Equipment getItem(String itemName){
+		for(Equipment e :theOne.mAllEquipmentList){
+			if(e.getName().equalsIgnoreCase(itemName)){
+				return e;
+			}
+		}
+		return null;
+	}
 	/**
 	 * Duong Tran
 	 * Get the list of equipments the player is carrying
@@ -447,11 +484,12 @@ public class Controller {
 	 * Load the Game
 	 */
 	public String loadUser(int key){
-		for(Player p : theOne.mAllPlayersList)
-			if(p.getID() == key){
-				//ArrayList<ArrayList<String>> rs = theOne.mPlayerDB.getRecord(String.valueOf(p.getID()));
-				mCurrentPlayer = p;
-				return "SUCCESS";
+		for(Player p : theOne.mAllPlayersList){
+				if(p.getID() == key){
+					//ArrayList<ArrayList<String>> rs = theOne.mPlayerDB.getRecord(String.valueOf(p.getID()));
+					mCurrentPlayer = p;
+					return "SUCCESS";
+				}
 			}
 		return "Player not Found.";
 	}
@@ -459,69 +497,19 @@ public class Controller {
 	 * Duong Tran
 	 * Save Player
 	 */
-	public void savePlayer(String key){
-		String[] thisPlayer = new String[]{String.valueOf(mCurrentPlayer.getID()), mCurrentPlayer.getName(), 
+	public void savePlayer(int key){
+		String[] values = new String[]{ mCurrentPlayer.getName(), 
 											String.valueOf(mCurrentPlayer.getStrength()),
 											String.valueOf(mCurrentPlayer.getDexterity()),
 											String.valueOf(mCurrentPlayer.getIntellect()),
-											String.valueOf(mCurrentPlayer.getHealth()),
 											mCurrentPlayer.getFace()};
-		
+		String[]fields = Arrays.copyOfRange(PLAYER_FIELD_NAMES, 1, PLAYER_FIELD_NAMES.length);
 		try {
-			System.out.println(theOne.mPlayerDB.getRecordCount());
-			theOne.mPlayerDB.updateRecord(key, PLAYER_FIELD_NAMES, thisPlayer);
-			theOne.mAllPlayersList.set(Integer.parseInt(key), mCurrentPlayer);
-			
+			theOne.mPlayerDB.updateRecord(String.valueOf(key), fields, values);
+			theOne.mAllPlayersList.set((key - 1), mCurrentPlayer);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-	//theOne.mPlayerDB.createRecord(Arrays.copyOfRange(PLAYER_FIELD_NAMES, 1, PLAYER_FIELD_NAMES.length), thisPlayer);
-	//theOne.mAllPlayersList.add(mCurrentPlayer);
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 }

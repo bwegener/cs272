@@ -33,22 +33,22 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Label layoutX="430.0" layoutY="72.0" prefHeight="35.0" prefWidth="137.0" text="None">
+      <Label fx:id="headgear" layoutX="430.0" layoutY="72.0" prefHeight="35.0" prefWidth="137.0" text="None">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label layoutX="430.0" layoutY="111.0" prefHeight="35.0" prefWidth="137.0" text="None">
+      <Label fx:id="bodygear" layoutX="430.0" layoutY="111.0" prefHeight="35.0" prefWidth="137.0" text="None">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label layoutX="430.0" layoutY="151.0" prefHeight="35.0" prefWidth="137.0" text="None">
+      <Label fx:id="leggear" layoutX="430.0" layoutY="151.0" prefHeight="35.0" prefWidth="137.0" text="None">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label layoutX="430.0" layoutY="189.0" prefHeight="35.0" prefWidth="137.0" text="None">
+      <Label fx:id="weapon" layoutX="430.0" layoutY="189.0" prefHeight="35.0" prefWidth="137.0" text="None">
          <font>
             <Font size="24.0" />
          </font>

@@ -21,7 +21,6 @@ import javafx.scene.image.ImageView;
 public class StatsScene implements Initializable  {
 	Controller controller = Controller.getInstance();
     private Player currentPlayer = controller.getCurrentPlayer();
-    private Equipment currentEquipment = new Equipment();
 
     @FXML
 	private Label nameLabel;
@@ -45,9 +44,11 @@ public class StatsScene implements Initializable  {
     
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
+    	if(controller.getCurrentEquipment() != null){
+    		damageLabel.setText(String.valueOf(controller.getCurrentEquipment().getDamage()));
+    		defenseLabel.setText(String.valueOf(controller.getCurrentEquipment().getDefense()));
+    	}
 		nameLabel.setText(currentPlayer.getName());
-		damageLabel.setText(String.valueOf(currentEquipment.getDamage()));
-		defenseLabel.setText(String.valueOf(currentEquipment.getDefense()));
 		strengthLabel.setText(String.valueOf(currentPlayer.getStrength()));
 		dexterityLabel.setText(String.valueOf(currentPlayer.getDexterity()));
 		intellectLabel.setText(String.valueOf(currentPlayer.getIntellect()));
